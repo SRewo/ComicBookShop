@@ -53,6 +53,10 @@
     <Compile Include="ComicBook.cs" />
     <Compile Include="ComicBookArtist.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="Migrations\201812131350539_Initial.cs" />
+    <Compile Include="Migrations\201812131350539_Initial.Designer.cs">
+      <DependentUpon>201812131350539_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderItem.cs" />
@@ -64,6 +68,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201812131350539_Initial.resx">
+      <DependentUpon>201812131350539_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
