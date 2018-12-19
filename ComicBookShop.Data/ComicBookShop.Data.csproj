@@ -53,6 +53,7 @@
     <Compile Include="ComicBook.cs" />
     <Compile Include="ComicBookArtist.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="Interfaces\IPublisherRepository.cs" />
     <Compile Include="Migrations\201812131350539_Initial.cs" />
     <Compile Include="Migrations\201812131350539_Initial.Designer.cs">
       <DependentUpon>201812131350539_Initial.cs</DependentUpon>
@@ -62,6 +63,7 @@
     <Compile Include="OrderItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Publisher.cs" />
+    <Compile Include="PublisherRepositories\SqlPublisherRepository.cs" />
     <Compile Include="Series.cs" />
     <Compile Include="ShopDbEntities.cs" />
   </ItemGroup>
