@@ -15,6 +15,6 @@ namespace ComicBookShop.Data
         public DateTime OnSaleDate { get; set; }
         public double Price { get; set; }
         public int Quantity { get; set; }
-        public Series Series { get; set; }
+        public virtual Series Series { get; set; }
     }
 }

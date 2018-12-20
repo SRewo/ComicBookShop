@@ -11,27 +11,24 @@ namespace ComicBookShop.Data.Test
         public void GetPublisherById_Normal_ReturnPublisher()
         {
 
-            SqlPublisherRepository repository = new SqlPublisherRepository();
+            IPublisherRepository repository = new SqlPublisherRepository();
             Publisher publisher = repository.GetPublisherById(1);
 
             Publisher expectedPublisher = new Publisher()
             {
                 Name = "DC Comics",
-                Description = "DC Comics, Inc. is an American comic book publisher. It is the publishing unit of DC Entertainment,[2][3] a subsidiary of Warner Bros. since 1967. DC Comics is one of the largest and oldest American comic book companies, and produces material featuring numerous culturally iconic heroic characters including: Superman, Batman, Wonder Woman, The Flash, Green Lantern, Martian Manhunter, Nightwing, Green Arrow, and Aquaman. ",
                 CreationDateTime = new DateTime(1934, 01, 01)
             };
 
             Assert.AreEqual(expectedPublisher.Name, publisher.Name);
-            Assert.AreEqual(expectedPublisher.Description, publisher.Description);
             Assert.AreEqual(expectedPublisher.CreationDateTime, publisher.CreationDateTime);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void UpdatePublisher_WithoutId_ThrowException()
         {
 
-            SqlPublisherRepository repository = new SqlPublisherRepository();
+            IPublisherRepository repository = new SqlPublisherRepository();
             Publisher updatedPublisher = new Publisher()
             {
                 Name = "Marvel Comics",
@@ -39,14 +36,13 @@ namespace ComicBookShop.Data.Test
                 CreationDateTime = new DateTime(1949, 01, 01)
             };
 
-            repository.UpdatePublisher(updatedPublisher);
+            Assert.ThrowsException<InvalidOperationException>(() => repository.UpdatePublisher(updatedPublisher));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void DeletePublisher_WithoutId_ThrowException()
         {
-            SqlPublisherRepository repository = new SqlPublisherRepository();
+            IPublisherRepository repository = new SqlPublisherRepository();
             Publisher deletedPublisher = new Publisher()
             {
                 Name = "Marvel Comics",
@@ -54,8 +50,16 @@ namespace ComicBookShop.Data.Test
                 CreationDateTime = new DateTime(1949, 01, 01)
             };
 
-            repository.DeletePublisher(deletedPublisher);
+            Assert.ThrowsException<InvalidOperationException>(() => repository.DeletePublisher(deletedPublisher));
         }
 
+        [TestMethod]
+        public void AddPublisher_WithId_ThrowException()
+        {
+            IPublisherRepository repository = new SqlPublisherRepository();
+            Publisher addedPublisher = repository.GetPublisherById(1);
+
+            Assert.ThrowsException<InvalidOperationException>(() =>repository.AddPublisher(addedPublisher));
+        }
     }
 }

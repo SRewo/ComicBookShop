@@ -53,6 +53,7 @@
     <Compile Include="ComicBook.cs" />
     <Compile Include="ComicBookArtist.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="Interfaces\IComicBookRepository.cs" />
     <Compile Include="Interfaces\IPublisherRepository.cs" />
     <Compile Include="Interfaces\ISeriesRepository.cs" />
     <Compile Include="Migrations\201812131350539_Initial.cs" />

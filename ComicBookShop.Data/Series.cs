@@ -13,7 +13,7 @@ namespace ComicBookShop.Data
         [Required]
         public string Name { get; set; }
         [Required]
-        public Publisher Publisher { get; set; }
+        public virtual Publisher Publisher { get; set; }
         public string Description { get; set; }
     }
 }
