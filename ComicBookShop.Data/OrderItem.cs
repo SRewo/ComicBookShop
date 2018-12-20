@@ -9,7 +9,7 @@ namespace ComicBookShop.Data
 {
     public class OrderItem
     {
-        public int Id { get; set; }
+        public int Id { get; private set; }
         [Required]
         public ComicBook ComicBook { get; set; }
         [Required]

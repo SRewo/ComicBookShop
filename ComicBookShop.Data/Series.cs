@@ -9,7 +9,7 @@ namespace ComicBookShop.Data
 {
     public class Series
     {
-        public int Id { get; set; }
+        public int Id { get; private set; }
         [Required]
         public string Name { get; set; }
         [Required]

@@ -33,7 +33,7 @@ namespace ComicBookShop.Data.PublisherRepositories
 
         public void DeletePublisher(Publisher publisher)
         {
-            if (publisher.Id == 0 | _context.Publishers.Find(publisher.Id) == null)
+            if (publisher.Id == 0)
             {
                 throw new InvalidOperationException("You are trying to delete publisher which is not in database");
             }
@@ -56,7 +56,7 @@ namespace ComicBookShop.Data.PublisherRepositories
 
         public void UpdatePublisher(Publisher publisher)
         {
-            if (publisher.Id == 0 | _context.Publishers.Find(publisher.Id) == null)
+            if (publisher.Id == 0)
             {
                 throw new InvalidOperationException("You are trying to edit publisher which is not in database");
             }
