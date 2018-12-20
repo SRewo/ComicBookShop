@@ -54,9 +54,14 @@
     <Compile Include="ComicBookArtist.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="Interfaces\IPublisherRepository.cs" />
+    <Compile Include="Interfaces\ISeriesRepository.cs" />
     <Compile Include="Migrations\201812131350539_Initial.cs" />
     <Compile Include="Migrations\201812131350539_Initial.Designer.cs">
       <DependentUpon>201812131350539_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812201031532_NotNullUpdate.cs" />
+    <Compile Include="Migrations\201812201031532_NotNullUpdate.Designer.cs">
+      <DependentUpon>201812201031532_NotNullUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Order.cs" />
@@ -65,6 +70,7 @@
     <Compile Include="Publisher.cs" />
     <Compile Include="PublisherRepositories\SqlPublisherRepository.cs" />
     <Compile Include="Series.cs" />
+    <Compile Include="SeriesRepositories\SqlSeriesRepository.cs" />
     <Compile Include="ShopDbEntities.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -74,6 +80,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201812131350539_Initial.resx">
       <DependentUpon>201812131350539_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812201031532_NotNullUpdate.resx">
+      <DependentUpon>201812201031532_NotNullUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

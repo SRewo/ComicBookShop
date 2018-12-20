@@ -42,5 +42,69 @@ namespace ComicBookShop.Data.Test
 
             repository.AddPublisher(insertedPublisher);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void UpdatePublisher_WithoutId_ThrowException()
+        {
+
+            SqlPublisherRepository repository = new SqlPublisherRepository();
+            Publisher updatedPublisher = new Publisher()
+            {
+                Name = "Marvel Comics",
+                Description = "Some random Description",
+                CreationDateTime = new DateTime(1949, 01, 01)
+            };
+
+            repository.UpdatePublisher(updatedPublisher);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void UpdatePublisher_WrongId_ThrowException()
+        {
+            SqlPublisherRepository repository = new SqlPublisherRepository();
+            Publisher updatedPublisher = new Publisher()
+            {
+                Id = 50000,
+                Name = "Marvel Comics",
+                Description = "Some random Description",
+                CreationDateTime = new DateTime(1949, 01, 01)
+            };
+
+            repository.UpdatePublisher(updatedPublisher);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void DeletePublisher_WithoutId_ThrowException()
+        {
+            SqlPublisherRepository repository = new SqlPublisherRepository();
+            Publisher deletedPublisher = new Publisher()
+            {
+                Name = "Marvel Comics",
+                Description = "Some random Description",
+                CreationDateTime = new DateTime(1949, 01, 01)
+            };
+
+            repository.DeletePublisher(deletedPublisher);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void DeletePublisher_WrongId_ThrowException()
+        {
+            SqlPublisherRepository repository = new SqlPublisherRepository();
+            Publisher deletedPublisher = new Publisher()
+            {
+                Id = 50000,
+                Name = "Marvel Comics",
+                Description = "Some random Description",
+                CreationDateTime = new DateTime(1949, 01, 01)
+            };
+
+            repository.DeletePublisher(deletedPublisher);
+        }
+
     }
 }

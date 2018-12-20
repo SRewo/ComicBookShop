@@ -10,8 +10,11 @@ namespace ComicBookShop.Data
     public class Order
     {
         public int Id { get; set; }
+        [Required]
         public DateTime Date { get; set; }
+        [Required]
         public List<OrderItem> OrderItems { get; set; }
+        [Required]
         public Employee Employee { get; set; }
     }
 }

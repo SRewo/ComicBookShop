@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +33,15 @@ namespace ComicBookShop.Data.PublisherRepositories
 
         public void DeletePublisher(Publisher publisher)
         {
-            throw new NotImplementedException();
+            if (publisher.Id == 0 | _context.Publishers.Find(publisher.Id) == null)
+            {
+                throw new InvalidOperationException("You are trying to delete publisher which is not in database");
+            }
+            else
+            {
+                _context.Entry(publisher).State = EntityState.Deleted;
+                _context.SaveChanges();
+            }
         }
 
         public Publisher GetPublisherById(int id)
@@ -46,7 +56,15 @@ namespace ComicBookShop.Data.PublisherRepositories
 
         public void UpdatePublisher(Publisher publisher)
         {
-            throw new NotImplementedException();
+            if (publisher.Id == 0 | _context.Publishers.Find(publisher.Id) == null)
+            {
+                throw new InvalidOperationException("You are trying to edit publisher which is not in database");
+            }
+            else
+            {
+                _context.Entry(publisher).State = EntityState.Modified;
+                _context.SaveChanges();
+            }
         }
     }
 }
