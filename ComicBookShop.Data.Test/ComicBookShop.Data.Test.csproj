@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F9D28623-2053-455D-A950-BF239832DDA3}</ProjectGuid>
+    <ProjectGuid>{FA19B5CE-989B-4B78-8DDD-3101297DB0F5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ComicBookShop.Data.Test</RootNamespace>
@@ -56,9 +56,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlPublisherRepositoryTest.cs" />
-    <Compile Include="SqlSeriesRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -66,7 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ComicBookShop.Data\ComicBookShop.Data.csproj">
-      <Project>{60C48C74-C0B0-4D12-A6DB-D0DA0B602045}</Project>
+      <Project>{60c48c74-c0b0-4d12-a6db-d0da0b602045}</Project>
       <Name>ComicBookShop.Data</Name>
     </ProjectReference>
   </ItemGroup>
