@@ -12,32 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
     using ComicBookShop.Desktop.Views;
+    using EmployeeModule.Views;
     using Prism.Ioc;
     using Prism.Regions;
 
-namespace ComicBookShop.Desktop
+namespace ComicBookShop.Desktop.Views
 {
     /// <summary>
     /// Logika interakcji dla klasy Shell.xaml
     /// </summary>
     public partial class Shell : Window
     {
-        private IContainerExtension _container;
-        private IRegionManager _regionManager;
 
-
-        public Shell(IContainerExtension container, IRegionManager manager)
+        public Shell()
         {
-
             InitializeComponent();
-
-            _container = container;
-            _regionManager = manager;
-
-            _regionManager.RegisterViewWithRegion("menu", typeof(MenuView));
         }
 
-
-        
     }
 }

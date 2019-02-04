@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using ComicBookShop.Desktop.Views;
 using CommonServiceLocator;
 using Prism.Ioc;
 using Prism.Modularity;
@@ -18,7 +19,7 @@ namespace ComicBookShop.Desktop
 
         protected override Window CreateShell()
         {
-            return ServiceLocator.Current.GetInstance<Shell>();
+            return Container.Resolve<Shell>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

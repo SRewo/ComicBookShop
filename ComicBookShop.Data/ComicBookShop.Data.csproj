@@ -62,6 +62,10 @@
     <Compile Include="Migrations\201812201031532_NotNullUpdate.Designer.cs">
       <DependentUpon>201812201031532_NotNullUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902041542147_EmployeeUpdate.cs" />
+    <Compile Include="Migrations\201902041542147_EmployeeUpdate.Designer.cs">
+      <DependentUpon>201902041542147_EmployeeUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderItem.cs" />
@@ -81,6 +85,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812201031532_NotNullUpdate.resx">
       <DependentUpon>201812201031532_NotNullUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902041542147_EmployeeUpdate.resx">
+      <DependentUpon>201902041542147_EmployeeUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

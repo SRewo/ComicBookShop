@@ -7,9 +7,8 @@
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
-    <Grid>
-            <ListBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,20,20,20" SelectedIndex="{Binding SelectedOption}" >
-                <ListBoxItem Content="First option"></ListBoxItem>
-            </ListBox>
-    </Grid>
+    <StackPanel>
+        <Button Content="Employee List" Width="auto" Height="25px" Margin="10,10,10,10" Command="{x:Static local:ApplicationCommands.NavigateCommand}" CommandParameter="EmployeeList"></Button>
+        <Button Content="Comicbook List" Width="auto" Height="25px" Margin="10,10,10,10"></Button>
+    </StackPanel>
 </UserControl>
