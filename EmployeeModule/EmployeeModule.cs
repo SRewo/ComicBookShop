@@ -27,11 +27,11 @@ namespace EmployeeModule
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            _regionManager.RegisterViewWithRegion("content", typeof(EmployeeListView));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterForNavigation<EmployeeListView>("EmployeeList");
         }
     }
 }

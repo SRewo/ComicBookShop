@@ -11,9 +11,17 @@
 
 
     <Grid>
-          <DataGrid ItemsSource="{Binding EmployeeList}" Margin="20,20,20,20" AutoGenerateColumns="False">
+          <DataGrid ItemsSource="{Binding EmployeeList}" Margin="20,20,20,20" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Job" Binding="{Binding Job}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Street Name" Binding="{Binding Address.StreetName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="City" Binding="{Binding Address.City}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Country" Binding="{Binding Address.Country}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Region" Binding="{Binding Address.Region}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Phone Number" Binding="{Binding PhoneNumber}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid> 
     </Grid>

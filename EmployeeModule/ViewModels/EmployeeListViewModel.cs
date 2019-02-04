@@ -34,7 +34,7 @@ namespace EmployeeModule.ViewModels
                 _employeeRepository = new SqlRepository<Employee>(datacontext);
                 var query = from employee in _employeeRepository.GetAll().AsEnumerable() select employee;
                 EmployeeList = query.ToList();
-                MessageBox.Show(EmployeeList.First().FirstName);
+
             }
             
         }
