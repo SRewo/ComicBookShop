@@ -8,7 +8,7 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
     <StackPanel>
-        <Button Content="Employee List" Width="auto" Height="25px" Margin="10,10,10,10" Command="{x:Static local:ApplicationCommands.NavigateCommand}" CommandParameter="EmployeeList"></Button>
+        <Button Content="Publishers" Width="auto" Height="25px" Margin="10,10,10,10" Command="{x:Static local:ApplicationCommands.NavigateCommand}" CommandParameter="PublisherList"></Button>
         <Button Content="Comicbook List" Width="auto" Height="25px" Margin="10,10,10,10"></Button>
     </StackPanel>
 </UserControl>
