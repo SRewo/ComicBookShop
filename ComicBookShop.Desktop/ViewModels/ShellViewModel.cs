@@ -39,7 +39,6 @@ namespace ComicBookShop.Desktop.ViewModels
             if (control != null)
             {
                 _regionManager.RequestNavigate("content", control);
-                MessageBox.Show(control);
             }
         }
 
