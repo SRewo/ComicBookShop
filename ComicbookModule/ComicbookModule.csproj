@@ -82,7 +82,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModels\AddEditPublisherViewModel.cs" />
     <Compile Include="ViewModels\PublishersListViewModel.cs" />
+    <Compile Include="Views\AddEditPublisherView.xaml.cs">
+      <DependentUpon>AddEditPublisherView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PublishersListView.xaml.cs">
       <DependentUpon>PublishersListView.xaml</DependentUpon>
     </Compile>
@@ -98,6 +102,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\AddEditPublisherView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PublishersListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

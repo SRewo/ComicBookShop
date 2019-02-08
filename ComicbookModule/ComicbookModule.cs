@@ -20,7 +20,7 @@ namespace ComicbookModule
         {
 
             containerRegistry.RegisterForNavigation<PublishersListView>("PublisherList");
-
+            containerRegistry.RegisterForNavigation<AddEditPublisherView>("AddEditPublisher");
         }
     }
 }

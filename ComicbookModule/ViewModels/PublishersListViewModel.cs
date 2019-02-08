@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Navigation;
 using ComicBookShop.Data;
 using ComicBookShop.Data.Repositories;
 using Prism.Commands;
 using Prism.Mvvm;
+using Prism.Regions;
 
 namespace ComicbookModule.ViewModels
 {
-    public class PublishersListViewModel : BindableBase
+    public class PublishersListViewModel : BindableBase, INavigationAware
     {
         private List<Publisher> _allPublishers;
         private SqlRepository<Publisher> _publisherRepository;
+        private IRegionManager _regionManager;
 
         private string _searchWord;
         private List<Publisher> _viewList;
@@ -40,7 +43,7 @@ namespace ComicbookModule.ViewModels
         public DelegateCommand AddPublisherCommand { get; set; }
         public DelegateCommand EditPublisherCommand { get; set; }
 
-        public PublishersListViewModel()
+        public PublishersListViewModel(IRegionManager regionManager)
         {
             using (var datacontext = new ShopDbEntities())
             {
@@ -48,12 +51,14 @@ namespace ComicbookModule.ViewModels
                 _publisherRepository = new SqlRepository<Publisher>(datacontext);
                 _allPublishers = _publisherRepository.GetAll().ToList();
                 ViewList = _allPublishers;
-
-                SearchWordChanged = new DelegateCommand(Search);
-                EditPublisherCommand = new DelegateCommand(OpenEdit);
-                AddPublisherCommand = new DelegateCommand(OpenAdd);
-
             }
+
+            SearchWordChanged = new DelegateCommand(Search);
+            EditPublisherCommand = new DelegateCommand(OpenEdit);
+            AddPublisherCommand = new DelegateCommand(OpenAdd);
+
+            _regionManager = regionManager;
+
         }
 
         private void Search()
@@ -88,12 +93,39 @@ namespace ComicbookModule.ViewModels
             else
             {
 
-                MessageBox.Show(_selectedPublisher.Name);
+                var parameters = new NavigationParameters
+                {
+                    { "publisher", _selectedPublisher }
+                };
+                _regionManager.RequestNavigate("content","AddEditPublisher",parameters);
 
             }
         }
 
         private void OpenAdd()
+        {
+            _regionManager.RequestNavigate("content","AddEditPublisher");
+        }
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+
+            using (var datacontext = new ShopDbEntities())
+            {
+
+                _publisherRepository = new SqlRepository<Publisher>(datacontext);
+                _allPublishers = _publisherRepository.GetAll().ToList();
+                ViewList = _allPublishers;
+            }
+
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
         {
 
         }
