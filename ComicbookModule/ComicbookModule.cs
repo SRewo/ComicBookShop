@@ -21,6 +21,8 @@ namespace ComicbookModule
 
             containerRegistry.RegisterForNavigation<PublishersListView>("PublisherList");
             containerRegistry.RegisterForNavigation<AddEditPublisherView>("AddEditPublisher");
+            containerRegistry.RegisterForNavigation<SeriesListView>("SeriesList");
+
         }
     }
 }
