@@ -10,18 +10,25 @@ using System.Threading.Tasks;
 
 namespace ComicBookShop.Data
 {
-    public class Publisher : NotifyDataErrorModel
+    public class Publisher : ValidableBase
     {
         
         public int Id { get; private set; }
 
         private string _name;
-        [Required] 
+        [Required]
         public string Name {
             get => _name; 
             set => SetProperty(ref _name, value); 
         }
-        public string Description { get; set; }
+
+        private string _description;
+
+        public string Description
+        {
+            get => _description;
+            set => SetProperty(ref _description, value);
+        }
 
         private DateTime _creationDateTime;
 
@@ -32,15 +39,24 @@ namespace ComicBookShop.Data
             set => SetProperty(ref _creationDateTime, value);
         }
 
-
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !(obj is Publisher))
+            {
+                return false;
+            }
+            return ((Publisher)obj).Id == this.Id;
+        }
     }
 
     public class CustomDateAttribute : RangeAttribute
     {
         public CustomDateAttribute()
             : base(typeof(DateTime),
-                DateTime.Now.AddYears(-119).ToShortDateString(),
+                "1900-01-01",
                 DateTime.Now.AddDays(1).ToShortDateString())
-        { }
+        {
+            ErrorMessage = "You have to choose a date between 01.01.1900 and today";
+        }
     }
 }

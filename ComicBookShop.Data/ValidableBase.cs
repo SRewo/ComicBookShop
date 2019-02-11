@@ -11,7 +11,7 @@ using Prism.Mvvm;
 
 namespace ComicBookShop.Data
 {
-    public class NotifyDataErrorModel : BindableBase, INotifyDataErrorInfo
+    public class ValidableBase : BindableBase, INotifyDataErrorInfo
     {
         private Dictionary<string, List<string>> _propErrors = new Dictionary<string, List<string>>();
 
@@ -61,6 +61,18 @@ namespace ComicBookShop.Data
 
             ErrorsChanged(this,new DataErrorsChangedEventArgs(propertyName));
 
+        }
+
+        public string GetFirstError(string propertyName)
+        {
+            if (_propErrors.ContainsKey(propertyName))
+            {
+                return _propErrors[propertyName].First();
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

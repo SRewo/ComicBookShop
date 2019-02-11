@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:ComicbookModule.Views"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -24,12 +25,32 @@
         </Grid.RowDefinitions>  
 
         <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Add/Edit Publisher" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold"/>
-        <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Name:" FontSize="16" />
-        <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="160px" Text="{Binding Publisher.Name, UpdateSourceTrigger=PropertyChanged , Mode=TwoWay, ValidatesOnDataErrors=True}" />
+        <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Name:" FontSize="16"/>
+        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="30,40,30,20">
+
+            <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Width="160px" Text="{Binding Publisher.Name, UpdateSourceTrigger=PropertyChanged , Mode=TwoWay, ValidatesOnDataErrors=True}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding NameChangedCommand}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
+            <TextBlock Text="{Binding NameErrorMessage}" Width="160px" FontSize="9px" VerticalAlignment="Top" Foreground="Red" TextWrapping="Wrap"></TextBlock>
+        </StackPanel>
         <Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Description:" FontSize="16" />
-        <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="160px"  Height="40px" TextWrapping="Wrap" Text="{Binding Publisher.Description}"/>
+        <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="160px"  Height="40px" TextWrapping="Wrap" Text="{Binding Publisher.Description, UpdateSourceTrigger=PropertyChanged}"/>
         <Label Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Founded:" FontSize="16" />
-        <DatePicker Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="160px" SelectedDate="{Binding Publisher.CreationDateTime , Mode=TwoWay , ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
+        <StackPanel Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <DatePicker Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="160px" SelectedDate="{Binding Publisher.CreationDateTime , Mode=TwoWay , ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectedDateChanged">
+                        <i:InvokeCommandAction Command="{Binding DateChangedCommand}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>    
+            </DatePicker>
+            <TextBlock Text="{Binding DateErrorMessage}" Width="160px" TextWrapping="Wrap" FontSize="9px" VerticalAlignment="Top" Foreground="Red"/>
+        </StackPanel>
+        
         
         <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Width="90" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Back" Margin="10,0,10,0" Command="{Binding GoBackCommand}"></Button>

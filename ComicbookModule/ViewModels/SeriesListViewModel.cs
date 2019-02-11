@@ -9,21 +9,22 @@ using ComicBookShop.Data;
 using ComicBookShop.Data.Repositories;
 using Prism.Commands;
 using Prism.Mvvm;
+using Prism.Regions;
 
 
 namespace ComicbookModule.ViewModels
 {
-    public class SeriesListViewModel : BindableBase
+    public class SeriesListViewModel : BindableBase , INavigationAware
     {
         private List<Series> _allSeries;
         private IRepository<Series> _seriesRepository;
         private IRepository<Publisher> _publisherRepository;
+        private IRegionManager _regionManager;
         public DelegateCommand EditSeriesCommand { get; set; }
         public DelegateCommand AddSeriesCommand { get; set; }
         public DelegateCommand SearchWordChanged { get; set; }
         public DelegateCommand SelectedPublisherChanged { get; set; }
-        public DelegateCommand ResetSearchCommand { get; set; }
-
+        public DelegateCommand ResetSearchCommand { get; set; }   
 
         private string _searchWord;
 
@@ -65,7 +66,7 @@ namespace ComicbookModule.ViewModels
             set => SetProperty(ref _selectedPublisher, value);
         }
 
-        public SeriesListViewModel()
+        public SeriesListViewModel(IRegionManager manager)
         {
 
             using (var context = new ShopDbEntities())
@@ -83,11 +84,15 @@ namespace ComicbookModule.ViewModels
             SearchWordChanged = new DelegateCommand(SearchByWord);
             SelectedPublisherChanged = new DelegateCommand(SearchByPublisher);
             ResetSearchCommand = new DelegateCommand(ResetSearch);
+            AddSeriesCommand = new DelegateCommand(OpenAdd);
+            EditSeriesCommand = new DelegateCommand(OpenEdit);
 
+            _regionManager = manager;
         }
 
         private void SearchByWord()
         {
+
             if (SelectedPublisher == null)
             {
                 var series = _allSeries.Where(c => c.Name.ToLower().Contains(SearchWord.Trim().ToLower()));
@@ -134,5 +139,55 @@ namespace ComicbookModule.ViewModels
 
         }
 
+        private void OpenAdd()
+        {
+
+            _regionManager.RequestNavigate("content","AddEditSeries");
+
+        }
+
+        private void OpenEdit()
+        {
+
+            if (SelectedSeries == null)
+            {
+
+                MessageBox.Show("You have to choose a series to edit.");
+
+            }
+            else
+            {
+
+                var parameters = new NavigationParameters()
+                {
+                    {"series", SelectedSeries }
+                };
+
+                _regionManager.RequestNavigate("content","AddEditSeries",parameters);
+
+            }
+
+        }
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            using (var context = new ShopDbEntities())
+            {
+                
+                _seriesRepository = new SqlRepository<Series>(context);
+                _allSeries = _seriesRepository.GetAll().Include(m => m.Publisher).ToList();
+                ViewList = _allSeries;
+
+            }
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+        }
     }
 }
