@@ -7,7 +7,14 @@
         mc:Ignorable="d"
         Title="Shell" Height="768" Width="1024"
         xmlns:prism="http://prismlibrary.com/" 
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         prism:ViewModelLocator.AutoWireViewModel="True" ResizeMode="CanResize">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding DbCheckCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <Grid>
 
         <Grid.ColumnDefinitions>

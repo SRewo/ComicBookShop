@@ -82,15 +82,23 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModels\AddEditArtistViewModel.cs" />
     <Compile Include="ViewModels\AddEditPublisherViewModel.cs" />
     <Compile Include="ViewModels\AddEditSeriesViewModel.cs" />
+    <Compile Include="ViewModels\ArtistListViewModel.cs" />
     <Compile Include="ViewModels\PublishersListViewModel.cs" />
     <Compile Include="ViewModels\SeriesListViewModel.cs" />
+    <Compile Include="Views\AddEditArtistView.xaml.cs">
+      <DependentUpon>AddEditArtistView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddEditPublisherView.xaml.cs">
       <DependentUpon>AddEditPublisherView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddEditSeriesView.xaml.cs">
       <DependentUpon>AddEditSeriesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ArtistListView.xaml.cs">
+      <DependentUpon>ArtistListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PublishersListView.xaml.cs">
       <DependentUpon>PublishersListView.xaml</DependentUpon>
@@ -110,11 +118,19 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\AddEditArtistView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddEditPublisherView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddEditSeriesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ArtistListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
