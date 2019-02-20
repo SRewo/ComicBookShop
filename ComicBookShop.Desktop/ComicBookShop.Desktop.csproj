@@ -142,6 +142,10 @@
       <Project>{8426852E-93F3-4940-ADE0-8C1DFC4942D5}</Project>
       <Name>ComicbookModule</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ComicBookShop.Data\ComicBookShop.Data.csproj">
+      <Project>{60C48C74-C0B0-4D12-A6DB-D0DA0B602045}</Project>
+      <Name>ComicBookShop.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EmployeeModule\EmployeeModule.csproj">
       <Project>{8F81A657-E316-4F6C-ABC4-1A8684EE6C3D}</Project>
       <Name>EmployeeModule</Name>

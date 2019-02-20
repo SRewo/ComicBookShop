@@ -45,7 +45,7 @@
 
         </StackPanel>
 
-        <DataGrid Grid.Row="1" ItemsSource="{Binding ViewList}" IsReadOnly="True" AutoGenerateColumns="False" SelectedItem="{Binding SelectedSeries}">
+        <DataGrid Grid.Row="1" ItemsSource="{Binding ViewList}" IsReadOnly="True" AutoGenerateColumns="False" SelectedItem="{Binding SelectedSeries}" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
                 <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>

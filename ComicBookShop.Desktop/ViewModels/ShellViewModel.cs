@@ -11,6 +11,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using System.Windows;
 using System.Windows.Input;
+using ComicBookShop.Data;
 
 namespace ComicBookShop.Desktop.ViewModels
 {
@@ -20,6 +21,7 @@ namespace ComicBookShop.Desktop.ViewModels
         private IRegionManager _regionManager;
 
         public DelegateCommand<string> NavigationCommand { get; private set; }
+        public DelegateCommand DbCheckCommand { get; private set; }
 
 
         public ShellViewModel(IContainerExtension container, IRegionManager manager)
@@ -32,6 +34,9 @@ namespace ComicBookShop.Desktop.ViewModels
             NavigationCommand = new DelegateCommand<string>(Navigate);
             ApplicationCommands.NavigateCommand.RegisterCommand(NavigationCommand);
 
+            DbCheckCommand = new DelegateCommand(CheckDb);
+            
+
         }
 
         private void Navigate(string control)
@@ -39,6 +44,18 @@ namespace ComicBookShop.Desktop.ViewModels
             if (control != null)
             {
                 _regionManager.RequestNavigate("content", control);
+            }
+        }
+
+        private void CheckDb()
+        {
+            using (var context = new ShopDbEntities())
+            {
+                if (!context.Database.Exists())
+                {
+                    MessageBox.Show("Unable to connect to database.");
+                    Application.Current.Shutdown();
+                }
             }
         }
 

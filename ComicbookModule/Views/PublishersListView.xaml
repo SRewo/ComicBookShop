@@ -27,7 +27,7 @@
              </TextBox>
          </StackPanel>
 
-        <DataGrid Grid.Row="1" ItemsSource="{Binding ViewList}" IsReadOnly="True" AutoGenerateColumns="False" SelectedItem="{Binding SelectedPublisher}">
+        <DataGrid Grid.Row="1" ItemsSource="{Binding ViewList}" IsReadOnly="True" AutoGenerateColumns="False" SelectedItem="{Binding SelectedPublisher}" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" Header="Id"></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Name}" Header="Name"></DataGridTextColumn>
