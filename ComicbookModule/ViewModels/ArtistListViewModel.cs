@@ -17,9 +17,10 @@ namespace ComicbookModule.ViewModels
 
         private IRepository<Artist> _artistRepository;
         private List<Artist> _allArtists;
-        private IRegionManager _regionManager;
+        private readonly IRegionManager _regionManager;
         public DelegateCommand AddArtistCommand { get; private set; }
         public DelegateCommand EditArtistCommand { get; private set; }
+        public DelegateCommand SearchWordChanged { get; private set; }
 
         private List<Artist> _viewList;
 
@@ -37,12 +38,12 @@ namespace ComicbookModule.ViewModels
             set => SetProperty(ref _searchWord, value);
         }
 
-        private Artist _artist;
+        private Artist _selectedArtist;
 
-        public Artist Artist
+        public Artist SelectedArtist
         {
-            get => _artist;
-            set => SetProperty(ref _artist, value);
+            get => _selectedArtist;
+            set => SetProperty(ref _selectedArtist, value);
         }
 
         public ArtistListViewModel(IRegionManager manager)
@@ -51,15 +52,9 @@ namespace ComicbookModule.ViewModels
             _regionManager = manager;
             AddArtistCommand = new DelegateCommand(OpenAdd);
             EditArtistCommand = new DelegateCommand(OpenEdit);
+            SearchWordChanged = new DelegateCommand(Search);
 
-            using (var context = new ShopDbEntities())
-            {
-                
-                _artistRepository = new SqlRepository<Artist>(context);
-                _allArtists = _artistRepository.GetAll().ToList();
-                ViewList = _allArtists;
-
-            }
+            ReloadTable();
 
         }
 
@@ -72,14 +67,34 @@ namespace ComicbookModule.ViewModels
 
         private void OpenEdit()
         {
-            if (Artist == null)
+            if (SelectedArtist == null)
                 MessageBox.Show("You have to choose artist.");
             else
             {
-                NavigationParameters parameters = new NavigationParameters();
-                parameters.Add("Artist",Artist);
+                NavigationParameters parameters = new NavigationParameters
+                {
+                    { "Artist", SelectedArtist }
+                };
                 _regionManager.RequestNavigate("content","AddEditArtist",parameters);
             }
+        }
+
+        private void Search()
+        {
+
+            if (string.IsNullOrEmpty(SearchWord))
+            {
+
+                ViewList = _allArtists;
+
+            }
+            else
+            {
+
+                ViewList = _allArtists.Where(c => c.Name.Contains(SearchWord)).ToList();
+
+            }
+
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -95,6 +110,19 @@ namespace ComicbookModule.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
 
+            ReloadTable();
+            
+        }
+
+        private void ReloadTable()
+        {
+            using (var context = new ShopDbEntities())
+            {
+
+                _artistRepository = new SqlRepository<Artist>(context);
+                _allArtists = _artistRepository.GetAll().ToList();
+                ViewList = _allArtists;
+            }
         }
     }
 }

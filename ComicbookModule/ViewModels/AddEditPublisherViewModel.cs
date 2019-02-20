@@ -151,7 +151,7 @@ namespace ComicbookModule.ViewModels
             if (Publisher == null)
             {
                 DateErrorMessage = string.Empty;
-                
+
             }
             else if (Publisher.HasErrors == true && Publisher.GetErrors("CreationDateTime") != null)
             {
