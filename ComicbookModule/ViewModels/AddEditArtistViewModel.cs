@@ -1,11 +1,11 @@
-﻿using ComicBookShop.Data;
+﻿using System.ComponentModel;
+using ComicBookShop.Data;
+using ComicBookShop.Data.Repositories;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
-using System.ComponentModel;
-using ComicBookShop.Data.Repositories;
 
-namespace ComicbookModule.ViewModels
+namespace ComicBookModule.ViewModels
 {
     public class AddEditArtistViewModel : BindableBase, INavigationAware
     {

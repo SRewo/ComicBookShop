@@ -11,5 +11,6 @@
         <Button Content="Publishers" Width="auto" Height="25px" Margin="10,10,10,10" Command="{x:Static local:ApplicationCommands.NavigateCommand}" CommandParameter="PublisherList"/>
         <Button Content="Series List" Width="auto" Height="25px" Margin="10,10,10,10" Command="{x:Static local:ApplicationCommands.NavigateCommand}" CommandParameter="SeriesList"/>
         <Button Content="Artists" Width="auto" Height="25px" Margin="10,10,10,10" Command="{x:Static local:ApplicationCommands.NavigateCommand}" CommandParameter="ArtistList"/>
+        <Button Content="Comic Books" Width="auto" Height="25px" Margin="10,10,10,10" Command="{x:Static local:ApplicationCommands.NavigateCommand}" CommandParameter="ComicBookList"/>
     </StackPanel>
 </UserControl>

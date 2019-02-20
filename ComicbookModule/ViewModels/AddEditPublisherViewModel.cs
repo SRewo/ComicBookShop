@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using ComicBookShop.Data;
 using ComicBookShop.Data.Repositories;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 
-namespace ComicbookModule.ViewModels
+namespace ComicBookModule.ViewModels
 {
     public class AddEditPublisherViewModel : BindableBase, INavigationAware
     {

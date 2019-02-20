@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ComicbookModule.Views;
+﻿using ComicBookModule.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 
-namespace ComicbookModule
+namespace ComicBookModule
 {
-    public class ComicbookModule : IModule
+    public class ComicBookModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
@@ -25,6 +20,8 @@ namespace ComicbookModule
             containerRegistry.RegisterForNavigation<AddEditSeriesView>("AddEditSeries");
             containerRegistry.RegisterForNavigation<ArtistListView>("ArtistList");
             containerRegistry.RegisterForNavigation<AddEditArtistView>("AddEditArtist");
+            containerRegistry.RegisterForNavigation<ComicBookListView>("ComicBookList");
+
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2046
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28407.52
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicBookShop.Data", "ComicBookShop.Data\ComicBookShop.Data.csproj", "{60C48C74-C0B0-4D12-A6DB-D0DA0B602045}"
 EndProject
@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{EB97
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeModule", "EmployeeModule\EmployeeModule.csproj", "{8F81A657-E316-4F6C-ABC4-1A8684EE6C3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicbookModule", "ComicbookModule\ComicbookModule.csproj", "{8426852E-93F3-4940-ADE0-8C1DFC4942D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicBookModule", "ComicbookModule\ComicBookModule.csproj", "{8426852E-93F3-4940-ADE0-8C1DFC4942D5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderModule", "OrderModule\OrderModule.csproj", "{2BB68511-D477-46DE-BE29-522ED5C9E096}"
 EndProject

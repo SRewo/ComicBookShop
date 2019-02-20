@@ -11,8 +11,6 @@ namespace ComicBookShop.Data
     {
         public int Id { get; private set; }
         [Required]
-        public virtual ComicBook ComicBook { get; set; }
-        [Required]
         public Artist Artist { get; set; }
         public string Type { get; set; }
     }

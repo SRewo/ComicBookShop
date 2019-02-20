@@ -3,11 +3,11 @@
 namespace ComicBookModule.Views
 {
     /// <summary>
-    /// Logika interakcji dla klasy AddEditPublisherView.xaml
+    /// Logika interakcji dla klasy ComicbookListView.xaml
     /// </summary>
-    public partial class AddEditPublisherView : UserControl
+    public partial class ComicBookListView : UserControl
     {
-        public AddEditPublisherView()
+        public ComicBookListView()
         {
             InitializeComponent();
         }

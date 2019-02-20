@@ -25,7 +25,7 @@ namespace ComicBookShop.Desktop
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
 
-            moduleCatalog.AddModule<ComicbookModule.ComicbookModule>();
+            moduleCatalog.AddModule<ComicBookModule.ComicBookModule>();
             moduleCatalog.AddModule<EmployeeModule.EmployeeModule>();
             moduleCatalog.AddModule<OrderModule.OrderModule>();
 

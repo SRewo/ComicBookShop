@@ -138,9 +138,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ComicbookModule\ComicbookModule.csproj">
+    <ProjectReference Include="..\ComicbookModule\ComicBookModule.csproj">
       <Project>{8426852E-93F3-4940-ADE0-8C1DFC4942D5}</Project>
-      <Name>ComicbookModule</Name>
+      <Name>ComicBookModule</Name>
     </ProjectReference>
     <ProjectReference Include="..\ComicBookShop.Data\ComicBookShop.Data.csproj">
       <Project>{60C48C74-C0B0-4D12-A6DB-D0DA0B602045}</Project>
