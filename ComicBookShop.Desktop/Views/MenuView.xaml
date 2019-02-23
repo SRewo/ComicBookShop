@@ -7,10 +7,12 @@
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
-    <StackPanel>
-        <Button Content="Publishers" Width="auto" Height="25px" Margin="10,10,10,10" Command="{x:Static local:ApplicationCommands.NavigateCommand}" CommandParameter="PublisherList"/>
-        <Button Content="Series List" Width="auto" Height="25px" Margin="10,10,10,10" Command="{x:Static local:ApplicationCommands.NavigateCommand}" CommandParameter="SeriesList"/>
-        <Button Content="Artists" Width="auto" Height="25px" Margin="10,10,10,10" Command="{x:Static local:ApplicationCommands.NavigateCommand}" CommandParameter="ArtistList"/>
-        <Button Content="Comic Books" Width="auto" Height="25px" Margin="10,10,10,10" Command="{x:Static local:ApplicationCommands.NavigateCommand}" CommandParameter="ComicBookList"/>
-    </StackPanel>
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#78909C">
+        <StackPanel VerticalAlignment="Center">
+            <Button Content="Publishers" Width="auto" Margin="10,10,10,10" Command="{x:Static local:ApplicationCommands.NavigateCommand}" CommandParameter="PublisherList" Background="Transparent" BorderThickness="0px" FontSize="22" FontWeight="Bold" FontFamily="Yu Gothic Light" Foreground="White"/>
+            <Button Content="Series List" Width="auto" Margin="10,10,10,10" Command="{x:Static local:ApplicationCommands.NavigateCommand}" CommandParameter="SeriesList" Background="Transparent" BorderThickness="0px" FontSize="22" FontWeight="Bold" FontFamily="Yu Gothic Light" Foreground="White"/>
+            <Button Content="Artists" Width="auto" Margin="10,10,10,10" Command="{x:Static local:ApplicationCommands.NavigateCommand}" CommandParameter="ArtistList" Background="Transparent" BorderThickness="0px" FontSize="22" FontWeight="Bold" FontFamily="Yu Gothic Light" Foreground="White"/>
+            <Button Content="Comic Books" Width="auto" Margin="10,10,10,10" Command="{x:Static local:ApplicationCommands.NavigateCommand}" CommandParameter="ComicBookList" Background="Transparent" BorderThickness="0px" FontSize="22" FontWeight="Bold" FontFamily="Yu Gothic Light" Foreground="White"/>
+        </StackPanel>
+    </Grid>
 </UserControl>

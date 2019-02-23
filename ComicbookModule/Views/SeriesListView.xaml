@@ -16,8 +16,13 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" >
-            <Button Content="Reset Search" Margin="0,0,10,0" Command="{Binding ResetSearchCommand}"/>
-            <ComboBox ItemsSource="{Binding Publishers, Mode=OneWay}" SelectedItem="{Binding SelectedPublisher}" MinWidth="120px" Margin="0,0,10,0">
+            <Button Content="Reset Search" Width="115" Height="30" Margin="0,0,10,0" Command="{Binding ResetSearchCommand}" Background="#0D47A1" BorderThickness="1px" BorderBrush="Black" FontFamily="Segoe UI Black" Foreground="White"/>
+            <ComboBox ItemsSource="{Binding Publishers, Mode=OneWay}" SelectedItem="{Binding SelectedPublisher}" Height="30" Width="200px" Margin="0,0,10,0">
+                <ComboBox.Style>
+                    <Style>
+                        
+                    </Style>
+                </ComboBox.Style>
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <Label Content="{Binding Name}"></Label>
@@ -44,7 +49,18 @@
 
         </StackPanel>
 
-        <DataGrid Grid.Row="1" ItemsSource="{Binding ViewList}" IsReadOnly="True" AutoGenerateColumns="False" SelectedItem="{Binding SelectedSeries}" SelectionMode="Single">
+        <DataGrid Grid.Row="1" ItemsSource="{Binding ViewList}" IsReadOnly="True" AutoGenerateColumns="False" SelectedItem="{Binding SelectedSeries}" SelectionMode="Single" Background="#E3F2FD">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#1E88E5"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="BorderThickness" Value="0.5px"/>
+                    <Setter Property="BorderBrush" Value="White"/>
+                    <Setter Property="Padding" Value="5,5,5,5"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="FontFamily" Value="Nirmala UI Semilight" />
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
                 <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
@@ -54,8 +70,8 @@
         </DataGrid>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Edit Series" VerticalAlignment="Center" Height="40px" Width="90px" Margin="0,0,10,0" Command="{Binding EditSeriesCommand}"></Button>
-            <Button Content="Add Series" VerticalAlignment="Center" Height="40px" Width="90px" Margin="0,0,10,0" Command="{Binding AddSeriesCommand}"></Button>
+            <Button Content="Edit Series" VerticalAlignment="Center" Height="30px" Width="90px" Margin="0,0,10,0" Command="{Binding EditSeriesCommand}" Background="#0D47A1" BorderThickness="1px" BorderBrush="Black" FontFamily="Segoe UI Black" Foreground="White"></Button>
+            <Button Content="Add Series" VerticalAlignment="Center" Height="30px" Width="90px" Margin="0,0,10,0" Command="{Binding AddSeriesCommand}" Background="#0D47A1" BorderThickness="1px" BorderBrush="Black" FontFamily="Segoe UI Black" Foreground="White"></Button>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" >
-            <Button Content="Reset Search" Margin="0,0,10,0" Command="{Binding ResetSearchCommand}"/>
+            <Button Content="Reset Search" Width="115" Height="30" Margin="0,0,10,0" Command="{Binding ResetSearchCommand}" Background="#0D47A1" BorderThickness="1px" BorderBrush="Black" FontFamily="Segoe UI Black" Foreground="White"/>
             <ComboBox ItemsSource="{Binding Publishers, Mode=OneWay}" SelectedItem="{Binding SelectedPublisher}" MinWidth="120px" Margin="0,0,10,0">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -44,7 +44,18 @@
 
         </StackPanel>
 
-        <DataGrid Grid.Row="1" ItemsSource="{Binding ViewList}" IsReadOnly="True" AutoGenerateColumns="False" SelectedItem="{Binding SelectedComicBook}" SelectionMode="Single">
+        <DataGrid Grid.Row="1" ItemsSource="{Binding ViewList}" IsReadOnly="True" AutoGenerateColumns="False" SelectedItem="{Binding SelectedComicBook}" SelectionMode="Single" Background="#E3F2FD">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#1E88E5"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="BorderThickness" Value="0.5px"/>
+                    <Setter Property="BorderBrush" Value="White"/>
+                    <Setter Property="Padding" Value="5,5,5,5"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="FontFamily" Value="Nirmala UI Semilight" />
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
                 <DataGridTextColumn Binding="{Binding Title}" Header="Title"/>
@@ -58,8 +69,8 @@
         </DataGrid>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Edit Comic Book" VerticalAlignment="Center" Height="40px" Width="115" Margin="0,5,10,5" Command="{Binding EditComicBookCommand}"></Button>
-            <Button Content="Add Comic Book" VerticalAlignment="Center" Height="40px" Width="125" Margin="0,5,10,5" Command="{Binding AddComicBookCommand}"></Button>
+            <Button Content="Edit Comic Book" VerticalAlignment="Center" Height="30px" Width="115" Margin="0,5,10,5" Command="{Binding EditComicBookCommand}" Background="#0D47A1" BorderThickness="1px" BorderBrush="Black" FontFamily="Segoe UI Black" Foreground="White"></Button>
+            <Button Content="Add Comic Book" VerticalAlignment="Center" Height="30px" Width="125" Margin="0,5,10,5" Command="{Binding AddComicBookCommand}" Background="#0D47A1" BorderThickness="1px" BorderBrush="Black" FontFamily="Segoe UI Black" Foreground="White"></Button>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -16,8 +16,8 @@
          </Grid.RowDefinitions>
 
          <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" >
-             <Label Content="Search:" Margin="0,0,10,0" FontWeight="Bold" />
-            <TextBox Width="100px" Text="{Binding Path=SearchWord, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,10,0">
+             <Label Content="Search:" Margin="0,0,20,0" FontFamily="Nirmala UI Semilight" FontSize="16" />
+            <TextBox Width="150px" Height="20px" Text="{Binding Path=SearchWord, UpdateSourceTrigger=PropertyChanged}" Margin="0,3,30,0">
                  <i:Interaction.Triggers>
                      <i:EventTrigger EventName="TextChanged">
                          <i:InvokeCommandAction Command="{Binding SearchWordChanged}" />
@@ -26,18 +26,29 @@
              </TextBox>
          </StackPanel>
 
-        <DataGrid Grid.Row="1" ItemsSource="{Binding ViewList}" IsReadOnly="True" AutoGenerateColumns="False" SelectedItem="{Binding SelectedPublisher}" SelectionMode="Single">
+        <DataGrid Grid.Row="1" ItemsSource="{Binding ViewList}" IsReadOnly="True" AutoGenerateColumns="False" SelectedItem="{Binding SelectedPublisher}" SelectionMode="Single" Background="#E3F2FD">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#1E88E5"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="BorderThickness" Value="0.5px"/>
+                    <Setter Property="BorderBrush" Value="White"/>
+                    <Setter Property="Padding" Value="5,5,5,5"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="FontFamily" Value="Nirmala UI Semilight" />
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Id}" Header="Id"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Name}" Header="Name"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Description}" Header="Description"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding CreationDateTime, StringFormat=yyyy}" Header="Founded"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
+                <DataGridTextColumn Binding="{Binding Description}" Header="Description"/>
+                    <DataGridTextColumn Binding="{Binding CreationDateTime, StringFormat=yyyy}" Header="Founded"/>
             </DataGrid.Columns>
         </DataGrid>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Edit Publisher" VerticalAlignment="Center" Height="40px" Width="90px" Margin="0,0,10,0" Command="{Binding EditPublisherCommand}"></Button>
-            <Button Content="Add Publisher" VerticalAlignment="Center" Height="40px" Width="90px" Margin="0,0,10,0" Command="{Binding AddPublisherCommand}"></Button>
+            <Button Content="Edit Publisher" VerticalAlignment="Center" Height="30px" Width="90px" Margin="0,0,10,0" Command="{Binding EditPublisherCommand}" Background="#0D47A1" BorderThickness="1px" BorderBrush="Black" FontFamily="Segoe UI Black" Foreground="White"/>
+            <Button Content="Add Publisher" VerticalAlignment="Center" Height="30px" Width="90px" Margin="0,0,10,0" Command="{Binding AddPublisherCommand}" Background="#0D47A1" BorderThickness="1px" BorderBrush="Black" FontFamily="Segoe UI Black" Foreground="White"/>
         </StackPanel>
 
     </Grid>
