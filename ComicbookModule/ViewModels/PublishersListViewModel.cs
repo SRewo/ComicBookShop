@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Navigation;
 using ComicBookShop.Data;
 using ComicBookShop.Data.Repositories;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 
-namespace ComicbookModule.ViewModels
+namespace ComicBookModule.ViewModels
 {
     public class PublishersListViewModel : BindableBase, INavigationAware
     {

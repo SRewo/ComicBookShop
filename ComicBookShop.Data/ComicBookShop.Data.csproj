@@ -69,6 +69,10 @@
     <Compile Include="Migrations\201902041542147_EmployeeUpdate.Designer.cs">
       <DependentUpon>201902041542147_EmployeeUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902201359169_ComicBookUpdate.cs" />
+    <Compile Include="Migrations\201902201359169_ComicBookUpdate.Designer.cs">
+      <DependentUpon>201902201359169_ComicBookUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ValidableBase.cs" />
     <Compile Include="Order.cs" />
@@ -92,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902041542147_EmployeeUpdate.resx">
       <DependentUpon>201902041542147_EmployeeUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902201359169_ComicBookUpdate.resx">
+      <DependentUpon>201902201359169_ComicBookUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -44,6 +44,7 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="Prism, Version=7.1.0.431, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.7.1.0.431\lib\net45\Prism.dll</HintPath>
     </Reference>
@@ -138,9 +139,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ComicbookModule\ComicbookModule.csproj">
+    <ProjectReference Include="..\ComicbookModule\ComicBookModule.csproj">
       <Project>{8426852E-93F3-4940-ADE0-8C1DFC4942D5}</Project>
-      <Name>ComicbookModule</Name>
+      <Name>ComicBookModule</Name>
     </ProjectReference>
     <ProjectReference Include="..\ComicBookShop.Data\ComicBookShop.Data.csproj">
       <Project>{60C48C74-C0B0-4D12-A6DB-D0DA0B602045}</Project>

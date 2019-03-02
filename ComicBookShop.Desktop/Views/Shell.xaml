@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ComicBookShop.Desktop"
         mc:Ignorable="d"
-        Title="Shell" Height="768" Width="1024"
+        Title="Comic Book Shop" Height="768" Width="1024"
         xmlns:prism="http://prismlibrary.com/" 
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         prism:ViewModelLocator.AutoWireViewModel="True" ResizeMode="CanResize">
@@ -19,11 +19,11 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200px"></ColumnDefinition>
-            <ColumnDefinition Width="9*"></ColumnDefinition>
+            <ColumnDefinition Width="9*" ></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <ContentControl Grid.Column="0" prism:RegionManager.RegionName="menu" VerticalAlignment="Center"></ContentControl>
-        <ContentControl Grid.Column="1" prism:RegionManager.RegionName="content"></ContentControl>
+        <ContentControl Grid.Column="0" Grid.Row="1" prism:RegionManager.RegionName="menu"/>
+        <ContentControl Grid.Column="1" Grid.Row="1" prism:RegionManager.RegionName="content"/>
 
     </Grid>
 </Window>
