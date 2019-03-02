@@ -131,7 +131,7 @@ namespace ComicBookModule.ViewModels
             }
             else if (Artist.HasErrors == true && Artist.GetErrors("LastName") != null)
             {
-                FirstNameErrorMessage = Artist.GetFirstError("LastName");
+                LastNameErrorMessage = Artist.GetFirstError("LastName");
             }
             else
             {

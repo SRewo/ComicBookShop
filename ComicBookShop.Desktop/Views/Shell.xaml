@@ -22,8 +22,8 @@
             <ColumnDefinition Width="9*" ></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <ContentControl Grid.Column="0" Grid.Row="1" prism:RegionManager.RegionName="menu"></ContentControl>
-        <ContentControl Grid.Column="1" Grid.Row="1" prism:RegionManager.RegionName="content"></ContentControl>
+        <ContentControl Grid.Column="0" Grid.Row="1" prism:RegionManager.RegionName="menu"/>
+        <ContentControl Grid.Column="1" Grid.Row="1" prism:RegionManager.RegionName="content"/>
 
     </Grid>
 </Window>
