@@ -10,14 +10,17 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
          <Grid.RowDefinitions>
-             <RowDefinition Height="60px"/>
+            <RowDefinition Height="70px"/>
+            <RowDefinition Height="60px"/>
              <RowDefinition Height="*" />
              <RowDefinition Height="50px"/>
          </Grid.RowDefinitions>
 
-         <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" >
-             <Label Content="Search:" Margin="0,0,20,0" FontFamily="Nirmala UI Semilight" FontSize="16" />
-            <TextBox Width="150px" Height="20px" Text="{Binding Path=SearchWord, UpdateSourceTrigger=PropertyChanged}" Margin="0,3,30,0">
+        <Label Content="Publisher List" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" FontFamily="Segoe UI Semibold" />
+
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" >
+            <Label Content="Search:" Margin="0,0,20,0" FontFamily="Nirmala UI" FontSize="16" FontWeight="Bold" />
+            <TextBox Width="200px" Height="30px" Text="{Binding Path=SearchWord, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,20,0" Background="White" BorderThickness="1" BorderBrush="Black" FontSize="14" VerticalContentAlignment="Center">
                  <i:Interaction.Triggers>
                      <i:EventTrigger EventName="TextChanged">
                          <i:InvokeCommandAction Command="{Binding SearchWordChanged}" />
@@ -26,10 +29,10 @@
              </TextBox>
          </StackPanel>
 
-        <DataGrid Grid.Row="1" ItemsSource="{Binding ViewList}" IsReadOnly="True" AutoGenerateColumns="False" SelectedItem="{Binding SelectedPublisher}" SelectionMode="Single" Background="#E3F2FD">
+        <DataGrid Grid.Row="2" ItemsSource="{Binding ViewList}" IsReadOnly="True" AutoGenerateColumns="False" SelectedItem="{Binding SelectedPublisher}" SelectionMode="Single" Background="#f5f5f5" Margin="40,20,40,20">
             <DataGrid.Resources>
                 <Style TargetType="DataGridColumnHeader">
-                    <Setter Property="Background" Value="#1E88E5"/>
+                    <Setter Property="Background" Value="#9e9e9e"/>
                     <Setter Property="Foreground" Value="White"/>
                     <Setter Property="BorderThickness" Value="0.5px"/>
                     <Setter Property="BorderBrush" Value="White"/>
@@ -46,9 +49,9 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Edit Publisher" VerticalAlignment="Center" Height="30px" Width="90px" Margin="0,0,10,0" Command="{Binding EditPublisherCommand}" Background="#0D47A1" BorderThickness="1px" BorderBrush="Black" FontFamily="Segoe UI Black" Foreground="White"/>
-            <Button Content="Add Publisher" VerticalAlignment="Center" Height="30px" Width="90px" Margin="0,0,10,0" Command="{Binding AddPublisherCommand}" Background="#0D47A1" BorderThickness="1px" BorderBrush="Black" FontFamily="Segoe UI Black" Foreground="White"/>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Edit Publisher" VerticalAlignment="Center" Height="30px" Width="125px" Margin="0,0,10,0" Command="{Binding EditPublisherCommand}" Background="#9e9e9e" BorderThickness="1px" BorderBrush="Black" FontFamily="Segoe UI Black" Foreground="White" FontSize="14"/>
+            <Button Content="Add Publisher" VerticalAlignment="Center" Height="30px" Width="125px" Margin="0,0,10,0" Command="{Binding AddPublisherCommand}" Background="#9e9e9e" BorderThickness="1px" BorderBrush="Black" FontFamily="Segoe UI Black" Foreground="White" FontSize="14"/>
         </StackPanel>
 
     </Grid>
