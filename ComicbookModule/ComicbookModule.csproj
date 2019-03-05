@@ -84,6 +84,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ViewModels\AddEditArtistViewModel.cs" />
+    <Compile Include="ViewModels\AddEditComicBookViewModel.cs" />
     <Compile Include="ViewModels\AddEditPublisherViewModel.cs" />
     <Compile Include="ViewModels\AddEditSeriesViewModel.cs" />
     <Compile Include="ViewModels\ArtistListViewModel.cs" />
@@ -92,6 +93,9 @@
     <Compile Include="ViewModels\SeriesListViewModel.cs" />
     <Compile Include="Views\AddEditArtistView.xaml.cs">
       <DependentUpon>AddEditArtistView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddEditComicBookView.xaml.cs">
+      <DependentUpon>AddEditComicBookView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddEditPublisherView.xaml.cs">
       <DependentUpon>AddEditPublisherView.xaml</DependentUpon>
@@ -124,6 +128,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\AddEditArtistView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddEditComicBookView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

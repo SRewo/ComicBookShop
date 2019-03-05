@@ -21,6 +21,7 @@ namespace ComicBookModule
             containerRegistry.RegisterForNavigation<ArtistListView>("ArtistList");
             containerRegistry.RegisterForNavigation<AddEditArtistView>("AddEditArtist");
             containerRegistry.RegisterForNavigation<ComicBookListView>("ComicBookList");
+            containerRegistry.RegisterForNavigation<AddEditComicBookView>("AddEditComicBook");
 
         }
     }

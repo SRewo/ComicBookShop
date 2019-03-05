@@ -13,12 +13,14 @@ namespace ComicBookModule.ViewModels
 {
     public class ComicBookListViewModel : BindableBase, INavigationAware
     {
+        private IRegionManager _regionManager;
         private readonly IRepository<ComicBook> _comicBookRepository;
         private readonly IRepository<Publisher> _publisherRepository;
         private readonly List<ComicBook> _allComicBooks;
         public DelegateCommand SelectedPublisherChanged { get; private set; }
         public DelegateCommand SearchWordChanged { get; private set; }
         public DelegateCommand ResetSearchCommand { get; private set; }
+        public DelegateCommand AddComicBookCommand { get; private set; }
 
         private List<ComicBook> _viewList;
 
@@ -54,7 +56,7 @@ namespace ComicBookModule.ViewModels
 
 
 
-        public ComicBookListViewModel()
+        public ComicBookListViewModel(IRegionManager manager)
         {
 
             using (var context = new ShopDbEntities())
@@ -71,7 +73,11 @@ namespace ComicBookModule.ViewModels
             SelectedPublisherChanged = new DelegateCommand(PublisherChanged);
             SearchWordChanged = new DelegateCommand(Search);
             ResetSearchCommand = new DelegateCommand(ResetSearch);
+            AddComicBookCommand = new DelegateCommand(OpenAdd);
+
             ViewList = _allComicBooks;
+
+            _regionManager = manager;
 
         }
 
@@ -112,6 +118,13 @@ namespace ComicBookModule.ViewModels
             SearchWord = String.Empty;
             SelectedPublisher = null;
             ViewList = _allComicBooks.ToList();
+
+        }
+
+        private void OpenAdd()
+        {
+
+            _regionManager.RequestNavigate("content", "AddEditComicBook");
 
         }
 
