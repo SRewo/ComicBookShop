@@ -66,7 +66,7 @@
                 <DataGridTextColumn Binding="{Binding Series.Publisher.Name}" Header="Publisher" />
                 <DataGridTextColumn Binding="{Binding OnSaleDate, StringFormat=yyyy-MM-dd}" Header="On Sale Date" />
                 <DataGridTextColumn Binding="{Binding ShortArtistDetail}" Header="Artists" />
-                <DataGridTextColumn Binding="{Binding Price}" Header="Price" />
+                <DataGridTextColumn Binding="{Binding Price, StringFormat={}{0:C}}" Header="Price" />
                 <DataGridTextColumn Binding="{Binding Quantity}" Header="Quantity" />
             </DataGrid.Columns>
         </DataGrid>

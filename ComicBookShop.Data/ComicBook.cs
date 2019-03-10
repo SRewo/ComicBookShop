@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,6 +33,7 @@ namespace ComicBookShop.Data
         private double _price;
 
         [Required]
+        [Range(Double.Epsilon, Double.MaxValue, ErrorMessage = "Please enter valid price.")]
         public double Price
         {
             get => _price;
@@ -39,6 +42,7 @@ namespace ComicBookShop.Data
 
         private int _quantity;
 
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter valid value.")]
         public int Quantity
         {
             get => _quantity;
@@ -47,16 +51,17 @@ namespace ComicBookShop.Data
 
         private Series _series;
 
+        [Required]
         public virtual Series Series
         {
             get => _series;
             set => SetProperty(ref _series, value);
         }
 
-        private ICollection<ComicBookArtist> _comicBookArtists;
+        private ObservableCollection<ComicBookArtist> _comicBookArtists;
 
         [Required]
-        public ICollection<ComicBookArtist> ComicBookArtists
+        public ObservableCollection<ComicBookArtist> ComicBookArtists
         {
             get => _comicBookArtists;
             set => SetProperty(ref _comicBookArtists,value);
