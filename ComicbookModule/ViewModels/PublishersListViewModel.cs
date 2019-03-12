@@ -43,14 +43,7 @@ namespace ComicBookModule.ViewModels
 
         public PublishersListViewModel(IRegionManager regionManager)
         {
-            using (var datacontext = new ShopDbEntities())
-            {
-
-                _publisherRepository = new SqlRepository<Publisher>(datacontext);
-                _allPublishers = _publisherRepository.GetAll().ToList();
-                ViewList = _allPublishers;
-            }
-
+            
             SearchWordChanged = new DelegateCommand(Search);
             EditPublisherCommand = new DelegateCommand(OpenEdit);
             AddPublisherCommand = new DelegateCommand(OpenAdd);

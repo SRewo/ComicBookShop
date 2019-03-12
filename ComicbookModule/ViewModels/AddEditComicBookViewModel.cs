@@ -94,17 +94,8 @@ namespace ComicBookModule.ViewModels
             RemoveArtistCommand = new DelegateCommand(RemoveArtist);
             GoBackCommand = new DelegateCommand(GoBack);
 
-
-
-            ComicBook = new ComicBook()
-            {
-                OnSaleDate = DateTime.Now
-            };
-            if(ComicBook.ComicBookArtists == null)
-                ComicBook.ComicBookArtists = new ObservableCollection<ComicBookArtist>();
-
             CanSave = false;
-            ComicBook.PropertyChanged += ComicBook_PropertyChanged;
+
         }
 
         private void ComicBook_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -120,7 +111,7 @@ namespace ComicBookModule.ViewModels
         private void AddArtist()
         {
 
-            if ( SelectedArtist != null && !ComicBook.ComicBookArtists.Any(x => x.Artist.Equals(SelectedArtist)) )
+            if ( SelectedArtist != null && !ComicBook.ComicBookArtists.Any(x => x.Artist.Id.Equals(SelectedArtist.Id)) )
             {
 
                 ComicBook.ComicBookArtists.Add(new ComicBookArtist()
@@ -165,7 +156,15 @@ namespace ComicBookModule.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            
+
+            ComicBook = (ComicBook) navigationContext.Parameters["ComicBook"];
+
+            ComicBook = ComicBook ?? new ComicBook()
+            {
+                OnSaleDate = DateTime.Now
+            };
+
+            ComicBook.PropertyChanged += ComicBook_PropertyChanged;
         }
     }
 }

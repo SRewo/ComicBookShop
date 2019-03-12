@@ -35,8 +35,8 @@
         </StackPanel>
 
         <Label Grid.Row="2" Grid.Column="0" Content="Series:" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontFamily="Nirmala UI"/>
-        
-        <ComboBox Grid.Row="2" Grid.Column="1" Width="200px" Height="30px" VerticalAlignment="Center" IsTextSearchEnabled="True" IsEditable="True" ItemsSource="{Binding SeriesList}" SelectedItem="{Binding ComicBook.Series}"/>
+
+        <ComboBox Grid.Row="2" Grid.Column="1" Width="200px" Height="30px" VerticalAlignment="Center" IsTextSearchEnabled="True" IsEditable="True" ItemsSource="{Binding SeriesList}" SelectedItem="{Binding ComicBook.Series}" SelectedValue="{Binding ComicBook.Series.Id, Mode=OneWay}" SelectedValuePath="Id" IsSynchronizedWithCurrentItem="True"/>
 
         <Label Grid.Row="3" Grid.Column="0" Content="Release Date: " VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontFamily="Nirmala UI" />
         <DatePicker SelectedDate="{Binding ComicBook.OnSaleDate}" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Width="200px" Height="30px" Background="White" BorderThickness="1" BorderBrush="Black" FontSize="18" FontFamily="Nirmala UI"/>

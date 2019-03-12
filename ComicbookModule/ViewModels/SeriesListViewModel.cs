@@ -65,18 +65,6 @@ namespace ComicBookModule.ViewModels
         public SeriesListViewModel(IRegionManager manager)
         {
 
-            using (var context = new ShopDbEntities())
-            {
-             
-                _seriesRepository = new SqlRepository<Series>(context);
-                _allSeries = _seriesRepository.GetAll().Include(m => m.Publisher).ToList();
-                ViewList = _allSeries;
-                
-                _publisherRepository = new SqlRepository<Publisher>(context);
-                _publishers = _publisherRepository.GetAll().ToList();
-
-            }
-
             SearchWordChanged = new DelegateCommand(SearchByWord);
             SelectedPublisherChanged = new DelegateCommand(SearchByPublisher);
             ResetSearchCommand = new DelegateCommand(ResetSearch);
@@ -174,6 +162,8 @@ namespace ComicBookModule.ViewModels
                 _allSeries = _seriesRepository.GetAll().Include(m => m.Publisher).ToList();
                 ViewList = _allSeries;
 
+                _publisherRepository = new SqlRepository<Publisher>(context);
+                Publishers = _publisherRepository.GetAll().ToList();
             }
         }
 
