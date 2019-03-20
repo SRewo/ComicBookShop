@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using ComicBookShop.Data;
 using ComicBookShop.Data.Repositories;
 using Prism.Commands;
@@ -163,18 +164,23 @@ namespace ComicBookModule.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
 
+            GetData();
+
+        }
+
+        public async void GetData()
+        {
             using (var context = new ShopDbEntities())
             {
 
                 _comicBookRepository = new SqlRepository<ComicBook>(context);
-                _allComicBooks = _comicBookRepository.GetAll().Include(x => x.ComicBookArtists).Include(x => x.Series).Include(x => x.Series.Publisher).Include(x => x.ComicBookArtists.Select(z => z.Artist)).ToList();
+                _allComicBooks = await _comicBookRepository.GetAll().Include(x => x.ComicBookArtists).Include(x => x.Series).Include(x => x.Series.Publisher).Include(x => x.ComicBookArtists.Select(z => z.Artist)).ToListAsync();
                 ViewList = _allComicBooks;
 
                 _publisherRepository = new SqlRepository<Publisher>(context);
-                Publishers = _publisherRepository.GetAll().ToList();
+                Publishers = await _publisherRepository.GetAll().ToListAsync();
 
             }
-
         }
     }
 }

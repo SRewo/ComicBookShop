@@ -146,7 +146,7 @@ namespace ComicBookModule.ViewModels
             {
 
                 _artistRepository = new SqlRepository<Artist>(context);
-                _artistRepository.Update(Artist);
+                _artistRepository.AddOrUpdate(Artist);
                 context.SaveChanges();
 
             }

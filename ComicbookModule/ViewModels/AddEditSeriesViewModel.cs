@@ -153,7 +153,7 @@ namespace ComicBookModule.ViewModels
                 
                 _seriesRepository = new SqlRepository<Series>(context);
                 context.Publishers.Attach(Series.Publisher);
-                _seriesRepository.Update(Series);
+                _seriesRepository.AddOrUpdate(Series);
                 context.SaveChanges();
 
             }

@@ -155,16 +155,8 @@ namespace ComicBookModule.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            using (var context = new ShopDbEntities())
-            {
-                
-                _seriesRepository = new SqlRepository<Series>(context);
-                _allSeries = _seriesRepository.GetAll().Include(m => m.Publisher).ToList();
-                ViewList = _allSeries;
-
-                _publisherRepository = new SqlRepository<Publisher>(context);
-                Publishers = _publisherRepository.GetAll().ToList();
-            }
+            GetTable();
+            
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -174,6 +166,21 @@ namespace ComicBookModule.ViewModels
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
+
+        }
+
+        private async void GetTable()
+        {
+            using (var context = new ShopDbEntities())
+            {
+
+                _seriesRepository = new SqlRepository<Series>(context);
+                _allSeries = await _seriesRepository.GetAll().Include(m => m.Publisher).ToListAsync();
+                ViewList = _allSeries;
+
+                _publisherRepository = new SqlRepository<Publisher>(context);
+                Publishers = await _publisherRepository.GetAll().ToListAsync();
+            }
         }
     }
 }

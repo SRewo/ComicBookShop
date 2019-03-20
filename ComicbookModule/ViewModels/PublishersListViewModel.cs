@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Windows;
 using ComicBookShop.Data;
@@ -101,13 +102,7 @@ namespace ComicBookModule.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
 
-            using (var datacontext = new ShopDbEntities())
-            {
-
-                _publisherRepository = new SqlRepository<Publisher>(datacontext);
-                _allPublishers = _publisherRepository.GetAll().ToList();
-                ViewList = _allPublishers;
-            }
+            GetTable();
 
         }
 
@@ -119,6 +114,17 @@ namespace ComicBookModule.ViewModels
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
 
+        }
+
+        private async void GetTable()
+        {
+            using (var datacontext = new ShopDbEntities())
+            {
+
+                _publisherRepository = new SqlRepository<Publisher>(datacontext);
+                _allPublishers = await _publisherRepository.GetAll().ToListAsync();
+                ViewList = _allPublishers;
+            }
         }
     }
 }

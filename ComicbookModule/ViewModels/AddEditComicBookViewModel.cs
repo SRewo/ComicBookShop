@@ -15,14 +15,15 @@ namespace ComicBookModule.ViewModels
 {
     class AddEditComicBookViewModel : BindableBase, INavigationAware
     {
-        private readonly IRegionManager _regionManager;
-        private readonly IRepository<ComicBook> _comicBookRepository;
-        private readonly IRepository<Artist> _artistRepository;
-        private readonly IRepository<Series> _seriesRepository;
+        private IRegionManager _regionManager;
+        private IRepository<ComicBook> _comicBookRepository;
+        private IRepository<Artist> _artistRepository;
+        private IRepository<Series> _seriesRepository;
 
         public DelegateCommand AddArtistCommand { get; set; }
         public DelegateCommand RemoveArtistCommand { get; set; }
         public DelegateCommand GoBackCommand { get; set; }
+        public DelegateCommand SaveComicBookCommand { get; set; }
 
         private ComicBook _comicBook;
 
@@ -79,20 +80,10 @@ namespace ComicBookModule.ViewModels
 
             _regionManager = manager;
 
-            using (var context = new ShopDbEntities())
-            {
-                
-                _artistRepository = new SqlRepository<Artist>(context);
-                Artists = _artistRepository.GetAll().ToList();
-
-                _seriesRepository = new SqlRepository<Series>(context);
-                SeriesList = _seriesRepository.GetAll().ToList();
-
-            }
-
             AddArtistCommand = new DelegateCommand(AddArtist);
             RemoveArtistCommand = new DelegateCommand(RemoveArtist);
             GoBackCommand = new DelegateCommand(GoBack);
+            SaveComicBookCommand = new DelegateCommand(SaveComicBook);
 
             CanSave = false;
 
@@ -137,6 +128,21 @@ namespace ComicBookModule.ViewModels
             }
         }
 
+        private async void SaveComicBook()
+        {
+
+            using (var context = new ShopDbEntities())
+            {
+                
+                _comicBookRepository = new SqlRepository<ComicBook>(context);
+                _comicBookRepository.AddOrUpdate(ComicBook);
+                await context.SaveChangesAsync();
+            }
+
+            _regionManager.RequestNavigate("content","ComicBookList");
+
+        }
+
         private void GoBack()
         {
 
@@ -161,8 +167,20 @@ namespace ComicBookModule.ViewModels
 
             ComicBook = ComicBook ?? new ComicBook()
             {
-                OnSaleDate = DateTime.Now
+                OnSaleDate = DateTime.Now,
+                ComicBookArtists =  new ObservableCollection<ComicBookArtist>()
             };
+
+            using (var context = new ShopDbEntities())
+            {
+
+                _artistRepository = new SqlRepository<Artist>(context);
+                Artists = _artistRepository.GetAll().ToList();
+
+                _seriesRepository = new SqlRepository<Series>(context);
+                SeriesList = _seriesRepository.GetAll().ToList();
+
+            }
 
             ComicBook.PropertyChanged += ComicBook_PropertyChanged;
         }
