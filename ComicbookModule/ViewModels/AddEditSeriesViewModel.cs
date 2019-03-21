@@ -11,8 +11,8 @@ namespace ComicBookModule.ViewModels
 {
     public class AddEditSeriesViewModel : BindableBase, INavigationAware
     {
-        private IRegionManager _regionManager;
-        private IRepository<Publisher> _publisherRepository;
+        private readonly IRegionManager _regionManager;
+        private readonly IRepository<Publisher> _publisherRepository;
         private IRepository<Series> _seriesRepository;
         public DelegateCommand NameChangedCommand { get; set; }
         public DelegateCommand SaveSeriesCommand { get; set; }

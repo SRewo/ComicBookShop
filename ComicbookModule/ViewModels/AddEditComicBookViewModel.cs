@@ -108,7 +108,7 @@ namespace ComicBookModule.ViewModels
                 ComicBook.ComicBookArtists.Add(new ComicBookArtist()
                 {
                     Artist = SelectedArtist,
-                    Type = String.Empty
+                    Type = String.Empty,
                 });
 
                 ComicBook_PropertyChanged(null, null);
@@ -133,8 +133,18 @@ namespace ComicBookModule.ViewModels
 
             using (var context = new ShopDbEntities())
             {
-                
+
                 _comicBookRepository = new SqlRepository<ComicBook>(context);
+
+                foreach (var comicBookArtist in ComicBook.ComicBookArtists)
+                {
+
+                    context.Artists.Attach(comicBookArtist.Artist);
+
+                }
+
+                context.Series.Attach(ComicBook.Series);
+
                 _comicBookRepository.AddOrUpdate(ComicBook);
                 await context.SaveChangesAsync();
             }
