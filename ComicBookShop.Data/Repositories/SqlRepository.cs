@@ -43,7 +43,7 @@ namespace ComicBookShop.Data.Repositories
         }
 
 
-        public void Update(T entity)
+        public void AddOrUpdate(T entity)
         {
 
             _dbSet.AddOrUpdate(entity);

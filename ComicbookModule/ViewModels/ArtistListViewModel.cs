@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Windows;
 using ComicBookShop.Data;
@@ -50,8 +51,6 @@ namespace ComicBookModule.ViewModels
             AddArtistCommand = new DelegateCommand(OpenAdd);
             EditArtistCommand = new DelegateCommand(OpenEdit);
             SearchWordChanged = new DelegateCommand(Search);
-
-            ReloadTable();
 
         }
 
@@ -107,17 +106,17 @@ namespace ComicBookModule.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
 
-            ReloadTable();
+            GetTable();
             
         }
 
-        private void ReloadTable()
+        private async void GetTable()
         {
             using (var context = new ShopDbEntities())
             {
 
                 _artistRepository = new SqlRepository<Artist>(context);
-                _allArtists = _artistRepository.GetAll().ToList();
+                _allArtists = await _artistRepository.GetAll().ToListAsync();
                 ViewList = _allArtists;
             }
         }

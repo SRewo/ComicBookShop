@@ -38,15 +38,6 @@ namespace ComicBookShop.Data
             get => _creationDateTime;
             set => SetProperty(ref _creationDateTime, value);
         }
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null || !(obj is Publisher))
-            {
-                return false;
-            }
-            return ((Publisher)obj).Id == this.Id;
-        }
     }
 
     public class CustomDateAttribute : RangeAttribute

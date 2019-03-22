@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using ComicBookShop.Data;
 using ComicBookShop.Data.Repositories;
 using Prism.Commands;
@@ -13,12 +14,15 @@ namespace ComicBookModule.ViewModels
 {
     public class ComicBookListViewModel : BindableBase, INavigationAware
     {
-        private readonly IRepository<ComicBook> _comicBookRepository;
-        private readonly IRepository<Publisher> _publisherRepository;
-        private readonly List<ComicBook> _allComicBooks;
+        private IRegionManager _regionManager;
+        private IRepository<ComicBook> _comicBookRepository;
+        private IRepository<Publisher> _publisherRepository;
+        private List<ComicBook> _allComicBooks;
         public DelegateCommand SelectedPublisherChanged { get; private set; }
         public DelegateCommand SearchWordChanged { get; private set; }
         public DelegateCommand ResetSearchCommand { get; private set; }
+        public DelegateCommand AddComicBookCommand { get; private set; }
+        public DelegateCommand EditComicBookCommand { get; private set; }
 
         private List<ComicBook> _viewList;
 
@@ -52,26 +56,36 @@ namespace ComicBookModule.ViewModels
             set => SetProperty(ref _searchWord, value);
         }
 
+        private ComicBook _selectedComicBook;
 
-
-        public ComicBookListViewModel()
+        public ComicBook SelectedComicBook
         {
+            get => _selectedComicBook;
+            set => SetProperty(ref _selectedComicBook, value);
+        }
 
-            using (var context = new ShopDbEntities())
-            {
-                
-                _comicBookRepository = new SqlRepository<ComicBook>(context);
-                _allComicBooks = _comicBookRepository.GetAll().Include(x => x.ComicBookArtists).Include(x => x.Series).Include(x => x.Series.Publisher).Include(x => x.ComicBookArtists.Select(z => z.Artist)).ToList();
+        private bool _canEdit;
 
-                _publisherRepository = new SqlRepository<Publisher>(context);
-                _publishers = _publisherRepository.GetAll().ToList();
+        public bool CanEdit
+        {
+            get => _canEdit;
+            set => SetProperty(ref _canEdit, value);
+        }
 
-            }
+
+
+        public ComicBookListViewModel(IRegionManager manager)
+        {
 
             SelectedPublisherChanged = new DelegateCommand(PublisherChanged);
             SearchWordChanged = new DelegateCommand(Search);
             ResetSearchCommand = new DelegateCommand(ResetSearch);
+            AddComicBookCommand = new DelegateCommand(OpenAdd);
+            EditComicBookCommand = new DelegateCommand(OpenEdit);
+
             ViewList = _allComicBooks;
+
+            _regionManager = manager;
 
         }
 
@@ -115,6 +129,22 @@ namespace ComicBookModule.ViewModels
 
         }
 
+        private void OpenAdd()
+        {
+
+            _regionManager.RequestNavigate("content", "AddEditComicBook");
+
+        }
+
+        private void OpenEdit()
+        {
+
+            NavigationParameters parameters = new NavigationParameters();
+            parameters.Add("ComicBook",SelectedComicBook);
+            _regionManager.RequestNavigate("content","AddEditComicBook",parameters);
+
+        }
+
         private bool CheckStringEquals(string first, string second)
         {
             return first.IndexOf(second, StringComparison.OrdinalIgnoreCase) != -1;
@@ -127,12 +157,30 @@ namespace ComicBookModule.ViewModels
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
-            
+           
+
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            
+
+            GetData();
+
+        }
+
+        public async void GetData()
+        {
+            using (var context = new ShopDbEntities())
+            {
+
+                _comicBookRepository = new SqlRepository<ComicBook>(context);
+                _allComicBooks = await _comicBookRepository.GetAll().Include(x => x.ComicBookArtists).Include(x => x.Series).Include(x => x.Series.Publisher).Include(x => x.ComicBookArtists.Select(z => z.Artist)).ToListAsync();
+                ViewList = _allComicBooks;
+
+                _publisherRepository = new SqlRepository<Publisher>(context);
+                Publishers = await _publisherRepository.GetAll().ToListAsync();
+
+            }
         }
     }
 }

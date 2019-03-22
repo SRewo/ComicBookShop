@@ -35,5 +35,10 @@ namespace ComicBookShop.Data
             get => _description;
             set => SetProperty(ref _description, value);
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

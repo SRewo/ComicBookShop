@@ -38,6 +38,10 @@ namespace ComicBookShop.Data
         }
 
         public string Name => FirstName + " " + LastName;
-        
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
