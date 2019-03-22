@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +21,8 @@ namespace ComicBookModule.ViewModels
         private IRepository<ComicBook> _comicBookRepository;
         private IRepository<Artist> _artistRepository;
         private IRepository<Series> _seriesRepository;
+        private IRepository<ComicBookArtist> _comicBookArtistRepository;
+        private List<ComicBookArtist> _deletedComicBookArtists;
 
         public DelegateCommand AddArtistCommand { get; set; }
         public DelegateCommand RemoveArtistCommand { get; set; }
@@ -73,6 +77,8 @@ namespace ComicBookModule.ViewModels
             set => SetProperty(ref _canSave, value);
         }
 
+        private bool _isEdited;
+
 
 
         public AddEditComicBookViewModel(IRegionManager manager)
@@ -92,7 +98,7 @@ namespace ComicBookModule.ViewModels
         private void ComicBook_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
 
-            if (ComicBook.Title != String.Empty && ComicBook.Price > 0 && ComicBook.Series != null && ComicBook.ComicBookArtists.Count() != 0)
+            if (!string.IsNullOrEmpty(ComicBook.Title) && ComicBook.Price > 0 && ComicBook.Series != null && ComicBook.ComicBookArtists.Count() != 0)
                 CanSave = !ComicBook.HasErrors;
             else
                 CanSave = false;
@@ -109,6 +115,7 @@ namespace ComicBookModule.ViewModels
                 {
                     Artist = SelectedArtist,
                     Type = String.Empty,
+                    ComicBook = ComicBook
                 });
 
                 ComicBook_PropertyChanged(null, null);
@@ -119,22 +126,30 @@ namespace ComicBookModule.ViewModels
 
         private void RemoveArtist()
         {
-            if (SelectedArtist != null)
+            if (SelectedComicBookArtist != null)
             {
-
+                _deletedComicBookArtists.Add(SelectedComicBookArtist);
                 ComicBook.ComicBookArtists.Remove(SelectedComicBookArtist);
                 ComicBook_PropertyChanged(null, null);
 
             }
         }
 
-        private async void SaveComicBook()
+        private void SaveComicBook()
         {
+
+            if (_isEdited)
+            {
+
+                SaveComicBookArtists();
+
+            }
 
             using (var context = new ShopDbEntities())
             {
 
                 _comicBookRepository = new SqlRepository<ComicBook>(context);
+                
 
                 foreach (var comicBookArtist in ComicBook.ComicBookArtists)
                 {
@@ -143,15 +158,55 @@ namespace ComicBookModule.ViewModels
 
                 }
 
+                context.Publishers.Attach(ComicBook.Series.Publisher);
                 context.Series.Attach(ComicBook.Series);
 
+                context.SaveChanges();
                 _comicBookRepository.AddOrUpdate(ComicBook);
-                await context.SaveChangesAsync();
+                context.SaveChanges();
             }
 
             _regionManager.RequestNavigate("content","ComicBookList");
 
         }
+
+        private void SaveComicBookArtists()
+        {
+            using (var context = new ShopDbEntities())
+            {
+
+                _comicBookArtistRepository = new SqlRepository<ComicBookArtist>(context);
+
+                context.ComicBooks.Attach(ComicBook);
+
+                foreach (var comicBookArtist in ComicBook.ComicBookArtists)
+                {
+
+                    context.Artists.Attach(comicBookArtist.Artist);
+                    context.Entry(comicBookArtist).State = EntityState.Modified;
+                    _comicBookArtistRepository.AddOrUpdate(comicBookArtist);
+
+                }
+
+                var tmp = _comicBookArtistRepository.GetAll().ToList();
+
+                foreach (var comicBookArtist in _deletedComicBookArtists)
+                {
+
+                    if (comicBookArtist != null && tmp.Any(x => x.Id == comicBookArtist.Id))
+                    {
+
+                        var tmpArtist = tmp.First(x => x.Id == comicBookArtist.Id);
+                        _comicBookArtistRepository.Delete(tmpArtist);
+                    }
+
+                }
+
+                context.SaveChanges();
+
+            }
+        }
+
 
         private void GoBack()
         {
@@ -175,6 +230,12 @@ namespace ComicBookModule.ViewModels
 
             ComicBook = (ComicBook) navigationContext.Parameters["ComicBook"];
 
+            _isEdited = ComicBook != null;
+
+            CanSave = false;
+
+            _deletedComicBookArtists = new List<ComicBookArtist>();
+
             ComicBook = ComicBook ?? new ComicBook()
             {
                 OnSaleDate = DateTime.Now,
@@ -193,6 +254,14 @@ namespace ComicBookModule.ViewModels
             }
 
             ComicBook.PropertyChanged += ComicBook_PropertyChanged;
+
+            foreach (var comicBookArtist in ComicBook.ComicBookArtists)
+            {
+
+                comicBookArtist.PropertyChanged += ComicBook_PropertyChanged;
+
+            }
+
         }
     }
 }
