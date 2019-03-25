@@ -30,7 +30,7 @@
 
         <Label Grid.Row="1" Grid.Column="0" Content="Title: " VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontFamily="Nirmala UI"/>
         <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
-            <TextBox Text="{Binding ComicBook.Title}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200px" Background="White" BorderThickness="1" BorderBrush="Black" FontSize="18" FontFamily="Nirmala UI"/>
+            <TextBox Text="{Binding ComicBook.Title}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200px"/>
             <TextBlock Text="{Binding TitleErrorMessage}" Width="160px" TextWrapping="Wrap" FontSize="11px" VerticalAlignment="Top" Foreground="Red" FontFamily="Nirmala UI"/>
         </StackPanel>
 
@@ -43,40 +43,29 @@
 
         <Label Grid.Row="4" Grid.Column="0" Content="Price:" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontFamily="Nirmala UI"/>
         <StackPanel Grid.Row="4" Grid.Column="1" VerticalAlignment="Center">
-            <TextBox Text="{Binding ComicBook.Price,StringFormat={}{0:C}}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200px" Background="White" BorderThickness="1" BorderBrush="Black" FontSize="18" FontFamily="Nirmala UI"></TextBox>
+            <TextBox Text="{Binding ComicBook.Price,StringFormat={}{0:C}}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200px" />
             <TextBlock Text="{Binding PriceErrorMessage}" Width="160px" TextWrapping="Wrap" FontSize="11px" VerticalAlignment="Top" Foreground="Red" FontFamily="Nirmala UI"/>
         </StackPanel>
 
         <Label Grid.Row="5" Grid.Column="0" Content="Quantity:" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontFamily="Nirmala UI"/>
         <StackPanel Grid.Row="5" Grid.Column="1" VerticalAlignment="Center">
-            <TextBox Text="{Binding ComicBook.Quantity}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200px" Background="White" BorderThickness="1" BorderBrush="Black" FontSize="18" FontFamily="Nirmala UI"></TextBox>
+            <TextBox Text="{Binding ComicBook.Quantity}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200px" />
             <TextBlock Text="{Binding QuantityErrorMessage}" Width="160px" TextWrapping="Wrap" FontSize="11px" VerticalAlignment="Top" Foreground="Red" FontFamily="Nirmala UI"/>
         </StackPanel>
 
         <ComboBox Grid.Row="1" Grid.Column="3" Width="200px" Height="30px" VerticalAlignment="Center" IsTextSearchEnabled="True" ItemsSource="{Binding Artists, Mode=OneWay}" IsEditable="True" SelectedItem="{Binding SelectedArtist, Mode=TwoWay}" />
-        <Button Grid.Row="1" Grid.Column="2" Width="125" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Add Artist" Margin="10,0,10,0" Command="{Binding AddArtistCommand}" Background="#9e9e9e" BorderThickness="1px" BorderBrush="Black" FontFamily="Segoe UI Black" Foreground="White" FontSize="14"/>
+        <Button Grid.Row="1" Grid.Column="2" Width="125" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Add Artist" Margin="10,0,10,0" Command="{Binding AddArtistCommand}"/>
 
         <DataGrid Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" AutoGenerateColumns="False" SelectionMode="Single" Background="#f5f5f5" ItemsSource="{Binding ComicBook.ComicBookArtists,Mode=OneWay,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" Margin="10" SelectedItem="{Binding SelectedComicBookArtist}">
-            <DataGrid.Resources>
-                <Style TargetType="DataGridColumnHeader">
-                    <Setter Property="Background" Value="#9e9e9e"/>
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="BorderThickness" Value="0.5px"/>
-                    <Setter Property="BorderBrush" Value="White"/>
-                    <Setter Property="Padding" Value="5,5,5,5"/>
-                    <Setter Property="FontSize" Value="14"/>
-                    <Setter Property="FontFamily" Value="Nirmala UI Semilight" />
-                </Style>
-            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Artist" Binding="{Binding Artist}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Role" Binding="{Binding Type}"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Grid.Row="4" Grid.Column="3" Width="125" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Remove Artist" Margin="10,0,10,0" Command="{Binding RemoveArtistCommand}" Background="#9e9e9e" BorderThickness="1px" BorderBrush="Black" FontFamily="Segoe UI Black" Foreground="White" FontSize="14"/>
+        <Button Grid.Row="4" Grid.Column="3" Width="125" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Remove Artist" Margin="10,0,10,0" Command="{Binding RemoveArtistCommand}"/>
 
-        <Button Grid.Row="5" Grid.Column="2" Width="125" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Back" Margin="10,0,10,0" Command="{Binding GoBackCommand}" Background="#9e9e9e" BorderThickness="1px" BorderBrush="Black" FontFamily="Segoe UI Black" Foreground="White" FontSize="14"/>
-        <Button Grid.Row="5" Grid.Column="3" Width="125" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Save" Margin="10,0,10,0" Command="{Binding SaveComicBookCommand}" Background="#9e9e9e" BorderThickness="1px" BorderBrush="Black" FontFamily="Segoe UI Black" Foreground="White" FontSize="14" IsEnabled="{Binding CanSave}"/>
+        <Button Grid.Row="5" Grid.Column="2" Width="125" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Back" Margin="10,0,10,0" Command="{Binding GoBackCommand}"/>
+        <Button Grid.Row="5" Grid.Column="3" Width="125" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Save" Margin="10,0,10,0" Command="{Binding SaveComicBookCommand}" IsEnabled="{Binding CanSave}"/>
     </Grid>
 </UserControl>

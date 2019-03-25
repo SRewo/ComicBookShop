@@ -12,8 +12,6 @@ namespace ComicBookModule.ViewModels
         private IRegionManager _regionManager;
         public DelegateCommand GoBackCommand { get; set; }
         public DelegateCommand SavePublisherCommand { get; set; }
-        public DelegateCommand NameChangedCommand { get; set; }
-        public DelegateCommand DateChangedCommand { get; set; }
 
         private bool _canSave;
 
@@ -55,8 +53,6 @@ namespace ComicBookModule.ViewModels
             _regionManager = manager;
             GoBackCommand = new DelegateCommand(GoBack);
             SavePublisherCommand = new DelegateCommand(SavePublisher);
-            NameChangedCommand = new DelegateCommand(CheckNameErrors);
-            DateChangedCommand = new DelegateCommand(CheckDateErrors);
 
         }
 
@@ -75,6 +71,10 @@ namespace ComicBookModule.ViewModels
         {
 
             Publisher = null;
+            NameErrorMessage = string.Empty;
+            DateErrorMessage = string.Empty;
+
+
             Publisher = (Publisher) navigationContext.Parameters["publisher"];
             if (Publisher == null)
             {
@@ -87,6 +87,14 @@ namespace ComicBookModule.ViewModels
             }
 
             Publisher.PropertyChanged += CanExecuteChanged;
+            Publisher.ErrorsChanged += Publisher_ErrorsChanged;
+        }
+
+        private void Publisher_ErrorsChanged(object sender, System.ComponentModel.DataErrorsChangedEventArgs e)
+        {
+
+            NameErrorMessage = Publisher.GetFirstError("Name");
+            DateErrorMessage = Publisher.GetFirstError("CreationDateTime");
         }
 
         private void CanExecuteChanged(object sender, EventArgs e)
@@ -121,41 +129,6 @@ namespace ComicBookModule.ViewModels
 
             }
 
-        }
-
-        private void CheckNameErrors()
-        {
-            if (Publisher == null)
-            {
-
-                NameErrorMessage = string.Empty;
-
-            }
-            else if (Publisher.HasErrors == true && Publisher.GetErrors("Name") != null)
-            {
-                NameErrorMessage = Publisher.GetFirstError("Name");
-            }
-            else
-            {
-                NameErrorMessage = string.Empty;
-            }
-        }
-
-        private void CheckDateErrors()
-        {
-            if (Publisher == null)
-            {
-                DateErrorMessage = string.Empty;
-
-            }
-            else if (Publisher.HasErrors == true && Publisher.GetErrors("CreationDateTime") != null)
-            {
-                DateErrorMessage = Publisher.GetFirstError("CreationDateTime");
-            }
-            else
-            {
-                DateErrorMessage = string.Empty;
-            }
         }
     }
 }

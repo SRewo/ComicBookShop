@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:ComicBookShop.Desktop"
              xmlns:prism="http://prismlibrary.com/">
     <prism:PrismApplication.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </prism:PrismApplication.Resources>
 </prism:PrismApplication>

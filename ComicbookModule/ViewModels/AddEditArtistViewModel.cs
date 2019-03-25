@@ -12,8 +12,6 @@ namespace ComicBookModule.ViewModels
         private readonly IRegionManager _regionManager;
         private IRepository<Artist> _artistRepository;
         public DelegateCommand GoBackCommand { get; private set; }
-        public DelegateCommand FirstNameChangedCommand { get; private set; }
-        public DelegateCommand LastNameChangedCommand { get; private set; }
         public DelegateCommand SaveArtistCommand { get; private set; }
 
         private Artist _artist;
@@ -53,8 +51,6 @@ namespace ComicBookModule.ViewModels
 
             _regionManager = manager;
             GoBackCommand = new DelegateCommand(GoBack);
-            FirstNameChangedCommand = new DelegateCommand(CheckFirstNameErrors);
-            LastNameChangedCommand = new DelegateCommand(CheckLastNameErrors);
             SaveArtistCommand = new DelegateCommand(SaveArtist);
 
         }
@@ -93,50 +89,21 @@ namespace ComicBookModule.ViewModels
 
             Artist = null;
             Artist = (Artist) navigationContext.Parameters["Artist"];
+            FirstNameErrorMessage = string.Empty;
+            LastNameErrorMessage = string.Empty;
 
             Artist = Artist ?? new Artist();
 
             CanSave = false;
             Artist.PropertyChanged += ArtistOnPropertyChanged;
+            Artist.ErrorsChanged += Artist_ErrorsChanged;
         }
 
-        private void CheckFirstNameErrors()
+        private void Artist_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
         {
 
-            if (Artist == null)
-            {
-
-                FirstNameErrorMessage = string.Empty;
-
-            }
-            else if (Artist.HasErrors == true && Artist.GetErrors("FirstName") != null)
-            {
-                FirstNameErrorMessage = Artist.GetFirstError("FirstName");
-            }
-            else
-            {
-                FirstNameErrorMessage = string.Empty;
-            }
-
-        }
-
-        private void CheckLastNameErrors()
-        {
-
-            if (Artist == null)
-            {
-
-                LastNameErrorMessage = string.Empty;
-
-            }
-            else if (Artist.HasErrors == true && Artist.GetErrors("LastName") != null)
-            {
-                LastNameErrorMessage = Artist.GetFirstError("LastName");
-            }
-            else
-            {
-                LastNameErrorMessage = string.Empty;
-            }
+            FirstNameErrorMessage = Artist.GetFirstError("FirstName");
+            LastNameErrorMessage = Artist.GetFirstError("LastName");
         }
 
         private void SaveArtist()

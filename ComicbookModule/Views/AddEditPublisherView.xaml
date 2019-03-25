@@ -26,33 +26,24 @@
         <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Name:" FontSize="18" FontFamily="Nirmala UI"/>
         <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="30,40,30,20">
 
-            <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Width="200px" Text="{Binding Publisher.Name, UpdateSourceTrigger=PropertyChanged , Mode=TwoWay, ValidatesOnDataErrors=True}" Background="White" BorderThickness="1" BorderBrush="Black" FontSize="18" FontFamily="Nirmala UI">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="TextChanged">
-                        <i:InvokeCommandAction Command="{Binding NameChangedCommand}"></i:InvokeCommandAction>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </TextBox>
+            <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Width="200px" Text="{Binding Publisher.Name, UpdateSourceTrigger=PropertyChanged , Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <TextBlock Text="{Binding NameErrorMessage}" Width="160px" FontSize="11px" VerticalAlignment="Top" Foreground="Red" TextWrapping="Wrap" FontFamily="Nirmala UI"/>
         </StackPanel>
+
         <Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Description:" FontSize="18" FontFamily="Nirmala UI" />
-        <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200px"  Height="120px" TextWrapping="Wrap" Text="{Binding Publisher.Description, UpdateSourceTrigger=PropertyChanged}" Background="White" BorderThickness="1" BorderBrush="Black" FontSize="18" FontFamily="Nirmala UI"/>
+
+        <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200px"  Height="120px" TextWrapping="Wrap" Text="{Binding Publisher.Description, UpdateSourceTrigger=PropertyChanged}"/>
+
         <Label Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Founded:" FontSize="18" FontFamily="Nirmala UI" />
         <StackPanel Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <DatePicker Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="160px" SelectedDate="{Binding Publisher.CreationDateTime , Mode=TwoWay , ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="White" BorderThickness="1" BorderBrush="Black" FontSize="18" FontFamily="Nirmala UI">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectedDateChanged">
-                        <i:InvokeCommandAction Command="{Binding DateChangedCommand}"></i:InvokeCommandAction>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </DatePicker>
+            <DatePicker Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="160px" SelectedDate="{Binding Publisher.CreationDateTime , Mode=TwoWay , ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="White" BorderThickness="1" BorderBrush="Black" FontSize="18" FontFamily="Nirmala UI"/>
             <TextBlock Text="{Binding DateErrorMessage}" Width="200px" TextWrapping="Wrap" FontSize="11px" VerticalAlignment="Top" Foreground="Red" FontFamily="Nirmala UI" />
         </StackPanel>
 
 
         <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Width="125" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Back" Margin="10,0,10,0" Command="{Binding GoBackCommand}" Background="#9e9e9e" BorderThickness="1px" BorderBrush="Black" FontFamily="Segoe UI Black" Foreground="White" FontSize="14"/>
-            <Button Width="125" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Save" Margin="10,0,10,0" Command="{Binding SavePublisherCommand}" IsEnabled="{Binding CanSave}" Background="#9e9e9e" BorderThickness="1px" BorderBrush="Black" FontFamily="Segoe UI Black" Foreground="White" FontSize="14"/>
+            <Button Width="125" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Back" Margin="10,0,10,0" Command="{Binding GoBackCommand}"/>
+            <Button Width="125" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Save" Margin="10,0,10,0" Command="{Binding SavePublisherCommand}" IsEnabled="{Binding CanSave}"/>
         </StackPanel>
     </Grid>
 </UserControl>
