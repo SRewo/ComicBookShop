@@ -79,6 +79,31 @@ namespace ComicBookModule.ViewModels
 
         private bool _isEdited;
 
+        private string _titleErrorMessage;
+
+        public string TitleErrorMessage
+        {
+            get => _titleErrorMessage;
+            set => SetProperty(ref _titleErrorMessage, value);
+        }
+
+        private string _priceErrorMessage;
+
+        public string PriceErrorMessage
+        {
+            get => _priceErrorMessage;
+            set => SetProperty(ref _priceErrorMessage, value);
+        }
+
+        private string _quantityErrorMessage;
+
+        public string QuantityErrorMessage
+        {
+            get => _quantityErrorMessage; 
+            set => SetProperty(ref _quantityErrorMessage, value); 
+        }
+
+
 
 
         public AddEditComicBookViewModel(IRegionManager manager)
@@ -229,6 +254,9 @@ namespace ComicBookModule.ViewModels
         {
 
             ComicBook = (ComicBook) navigationContext.Parameters["ComicBook"];
+            PriceErrorMessage = string.Empty;
+            QuantityErrorMessage = string.Empty;
+            TitleErrorMessage = string.Empty;
 
             _isEdited = ComicBook != null;
 
@@ -262,6 +290,14 @@ namespace ComicBookModule.ViewModels
 
             }
 
+            ComicBook.ErrorsChanged += ComicBook_ErrorsChanged;
+        }
+
+        private void ComicBook_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
+        {
+            TitleErrorMessage = ComicBook.GetFirstError("Title");
+            PriceErrorMessage = ComicBook.GetFirstError("Price");
+            QuantityErrorMessage = ComicBook.GetFirstError("Quantity");
         }
     }
 }

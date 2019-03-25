@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Markup;
 using ComicBookShop.Data;
 using ComicBookShop.Data.Repositories;
 using Prism.Commands;
@@ -14,7 +15,6 @@ namespace ComicBookModule.ViewModels
         private readonly IRegionManager _regionManager;
         private readonly IRepository<Publisher> _publisherRepository;
         private IRepository<Series> _seriesRepository;
-        public DelegateCommand NameChangedCommand { get; set; }
         public DelegateCommand SaveSeriesCommand { get; set; }
         public DelegateCommand GoBackCommand { get; set; }
 
@@ -64,7 +64,6 @@ namespace ComicBookModule.ViewModels
             _regionManager = manager;
 
             GoBackCommand = new DelegateCommand(GoBack);
-            NameChangedCommand = new DelegateCommand(CheckNameErrors);
             SaveSeriesCommand = new DelegateCommand(SaveSeries);
 
 
@@ -93,6 +92,7 @@ namespace ComicBookModule.ViewModels
         {
             Series = null;
             CanSave = false;
+            NameErrorMessage = string.Empty;
             Series = (Series) navigationContext.Parameters["series"];
             if (Series == null)
             {
@@ -108,6 +108,12 @@ namespace ComicBookModule.ViewModels
 
 
             Series.PropertyChanged += CanSaveChanged;
+            Series.ErrorsChanged += Series_ErrorsChanged;
+        }
+
+        private void Series_ErrorsChanged(object sender, System.ComponentModel.DataErrorsChangedEventArgs e)
+        {
+            NameErrorMessage = Series.GetFirstError("Name");
         }
 
         private void CanSaveChanged(object sender, EventArgs e)
@@ -125,24 +131,6 @@ namespace ComicBookModule.ViewModels
 
             _regionManager.RequestNavigate("content","SeriesList");
 
-        }
-
-        private void CheckNameErrors()
-        {
-            if (Series == null)
-            {
-
-                NameErrorMessage = string.Empty;
-
-            }
-            else if (Series.HasErrors == true && Series.GetErrors("Name") != null)
-            {
-                NameErrorMessage = Series.GetFirstError("Name");
-            }
-            else
-            {
-                NameErrorMessage = string.Empty;
-            }
         }
 
         private void SaveSeries()
