@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EmployeeModule.Views;
+﻿using EmployeeModuleNamespace.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
 
-namespace EmployeeModule
+namespace EmployeeModuleNamespace
 {
     public class EmployeeModule : IModule
     {
@@ -31,7 +26,7 @@ namespace EmployeeModule
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<EmployeeListView>("EmployeeList");
+            containerRegistry.RegisterForNavigation<LoginView>("LoginView");
         }
     }
 }

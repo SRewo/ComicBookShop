@@ -1,5 +1,4 @@
-﻿using EmployeeModule.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EmployeeModule.Views
+namespace OrderModule.Views
 {
     /// <summary>
-    /// Logika interakcji dla klasy EmployeeListView.xaml
+    /// Logika interakcji dla klasy AddOrderView.xaml
     /// </summary>
-    public partial class EmployeeListView : UserControl
+    public partial class AddOrderView : UserControl
     {
-        public EmployeeListView()
+        public AddOrderView()
         {
             InitializeComponent();
         }

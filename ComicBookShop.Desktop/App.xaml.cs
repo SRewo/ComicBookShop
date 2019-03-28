@@ -26,7 +26,7 @@ namespace ComicBookShop.Desktop
         {
 
             moduleCatalog.AddModule<ComicBookModule.ComicBookModule>();
-            moduleCatalog.AddModule<EmployeeModule.EmployeeModule>();
+            moduleCatalog.AddModule<EmployeeModuleNamespace.EmployeeModule>();
             moduleCatalog.AddModule<OrderModule.OrderModule>();
 
         }

@@ -1,4 +1,4 @@
-﻿using EmployeeModule.Views;
+﻿using EmployeeModuleNamespace.Views;
 using Prism.Ioc;
 using Prism.Regions;
 using System;
@@ -18,7 +18,7 @@ namespace ComicBookShop.Desktop.ViewModels
     public class ShellViewModel : BindableBase
     {
         private IContainerExtension _container;
-        private IRegionManager _regionManager;
+        private readonly IRegionManager _regionManager;
 
         public DelegateCommand<string> NavigationCommand { get; private set; }
         public DelegateCommand DbCheckCommand { get; private set; }
@@ -30,12 +30,10 @@ namespace ComicBookShop.Desktop.ViewModels
             _container = container;
             _regionManager = manager;
 
-            _regionManager.RegisterViewWithRegion("menu", typeof(MenuView));
+            _regionManager.RegisterViewWithRegion("content", typeof(LoginView));
+            container.RegisterForNavigation<MenuView>("MenuView");
             NavigationCommand = new DelegateCommand<string>(Navigate);
             ApplicationCommands.NavigateCommand.RegisterCommand(NavigationCommand);
-
-            DbCheckCommand = new DelegateCommand(CheckDb);
-            
 
         }
 
@@ -44,18 +42,6 @@ namespace ComicBookShop.Desktop.ViewModels
             if (control != null)
             {
                 _regionManager.RequestNavigate("content", control);
-            }
-        }
-
-        private void CheckDb()
-        {
-            using (var context = new ShopDbEntities())
-            {
-                if (!context.Database.Exists())
-                {
-                    MessageBox.Show("Unable to connect to database.");
-                    Application.Current.Shutdown();
-                }
             }
         }
 

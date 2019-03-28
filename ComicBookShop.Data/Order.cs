@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ComicBookShop.Data
 {
-    public class Order
+    public class Order : ValidableBase
     {
         public int Id { get; private set; }
         [Required]

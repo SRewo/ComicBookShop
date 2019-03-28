@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{8F81A657-E316-4F6C-ABC4-1A8684EE6C3D}</ProjectGuid>
     <OutputType>library</OutputType>
-    <RootNamespace>EmployeeModule</RootNamespace>
+    <RootNamespace>EmployeeModuleNamespace</RootNamespace>
     <AssemblyName>EmployeeModule</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -30,6 +30,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
@@ -69,9 +72,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmployeeModule.cs" />
-    <Compile Include="ViewModels\EmployeeListViewModel.cs" />
-    <Compile Include="Views\EmployeeListView.xaml.cs">
-      <DependentUpon>EmployeeListView.xaml</DependentUpon>
+    <Compile Include="Interfaces\IContainPassword.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -106,10 +110,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\EmployeeListView.xaml">
+    <Page Include="Views\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
