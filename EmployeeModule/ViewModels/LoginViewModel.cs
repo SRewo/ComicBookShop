@@ -62,8 +62,9 @@ namespace EmployeeModuleNamespace.ViewModels
             {
                 var secureString = passwordContainer.Password;
                 if (CheckUserExists(Username) && CheckPasswords(_loggedEmployee,secureString))
-                { 
+                {
 
+                    GlobalVariables.LoggedEmployee = _loggedEmployee;
                     Redirect();
 
                 }
@@ -105,19 +106,19 @@ namespace EmployeeModuleNamespace.ViewModels
 
         }
 
-        private bool CheckPasswords(Employee emp, SecureString SecurePassword)
+        private static bool CheckPasswords(Employee emp, SecureString securePassword)
         {
 
-            return emp.Password == Encrypt(new System.Net.NetworkCredential(string.Empty, SecurePassword).Password);
+            return emp.Password == Encrypt(new System.Net.NetworkCredential(string.Empty, securePassword).Password);
 
         }
 
         public static string Encrypt(string password)
         {
-            StringBuilder stringBuilder = new StringBuilder();
-            byte[] data = Encoding.UTF8.GetBytes(password);
+            var stringBuilder = new StringBuilder();
+            var data = Encoding.UTF8.GetBytes(password);
             data = new SHA256Managed().ComputeHash(data);
-            foreach (byte b in data)
+            foreach (var b in data)
             {
                 stringBuilder.Append(b.ToString("x2"));
             }

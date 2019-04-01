@@ -72,10 +72,10 @@ namespace ComicBookShop.Data
 
 
         private string GetShortArtistDetail()
-        {
+        { 
 
-            int n = ComicBookArtists.Count();
-            string result = string.Empty;
+            var n =  ComicBookArtists.Count;
+            var result = string.Empty;
             foreach (var artist in ComicBookArtists)
             {
                 result += n == 1 ? artist.Artist.Name : artist.Artist.Name + ", ";

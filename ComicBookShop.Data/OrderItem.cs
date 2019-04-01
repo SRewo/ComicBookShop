@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ComicBookShop.Data
 {
-    public class OrderItem
+    public class OrderItem : ValidableBase
     {
         public int Id { get; private set; }
         [Required]
@@ -15,6 +16,8 @@ namespace ComicBookShop.Data
         [Required]
         public int Quantity { get; set; }
         public int Discount { get; set; }
+
+        public double Price => (ComicBook.Price * Quantity * (1 - Discount * 0.01));
 
     }
 }

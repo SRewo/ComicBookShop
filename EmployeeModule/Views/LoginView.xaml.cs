@@ -1,13 +1,13 @@
-﻿using System.Security;
+﻿using EmployeeModuleNamespace.Interfaces;
+using System.Security;
 using System.Windows.Controls;
-using EmployeeModuleNamespace.Interfaces;
 
 namespace EmployeeModuleNamespace.Views
 {
     /// <summary>
     /// Logika interakcji dla klasy LoginView.xaml
     /// </summary>
-    public partial class LoginView : UserControl, IContainPassword
+    public partial class LoginView : IContainPassword
     {
         public LoginView()
         {

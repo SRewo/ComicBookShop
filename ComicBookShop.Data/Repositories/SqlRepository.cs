@@ -11,7 +11,7 @@ namespace ComicBookShop.Data.Repositories
     public class SqlRepository<T> : IRepository<T> where T : class
     {
 
-        private DbSet<T> _dbSet;
+        private readonly DbSet<T> _dbSet;
 
         public SqlRepository(DbContext dataContext)
         {

@@ -1,6 +1,4 @@
 ﻿using System.Reflection;
-using System.Resources;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
 
@@ -31,13 +29,13 @@ using System.Windows;
 //[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.Satellite)]
 
 
-[assembly:ThemeInfo(
+[assembly: ThemeInfo(
     ResourceDictionaryLocation.None, //gdzie znajdują się słowniki zasobów specyficznych dla motywów
-                             //(używane, jeśli nie można odnaleźć zasobu na stronie,
-                             // lub słowniki zasobów aplikacji)
+                                     //(używane, jeśli nie można odnaleźć zasobu na stronie,
+                                     // lub słowniki zasobów aplikacji)
     ResourceDictionaryLocation.SourceAssembly //gdzie znajduje się słownik zasobów ogólnych
-                                      //(używane, jeśli nie można odnaleźć zasobu na stronie,
-                                      // aplikacji lub słowników zasobów specyficznych dla motywów)
+                                              //(używane, jeśli nie można odnaleźć zasobu na stronie,
+                                              // aplikacji lub słowników zasobów specyficznych dla motywów)
 )]
 
 

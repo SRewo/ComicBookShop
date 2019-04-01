@@ -56,6 +56,7 @@
     <Compile Include="ComicBook.cs" />
     <Compile Include="ComicBookArtist.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="GlobalVariables.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Migrations\201812131350539_Initial.cs" />
     <Compile Include="Migrations\201812131350539_Initial.Designer.cs">

@@ -13,24 +13,15 @@ namespace ComicBookShop.Data
 {
     public class ValidableBase : BindableBase, INotifyDataErrorInfo
     {
-        private Dictionary<string, List<string>> _propErrors = new Dictionary<string, List<string>>();
+        private readonly Dictionary<string, List<string>> _propErrors = new Dictionary<string, List<string>>();
 
-        public bool HasErrors => (_propErrors.Count() > 0);
+        public bool HasErrors => _propErrors.Any();
 
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged = delegate{};
 
         public IEnumerable GetErrors(string propertyName)
-        {
-            
-            if (_propErrors.ContainsKey(propertyName))
-            {
+        { 
                 return _propErrors[propertyName];
-            }
-            else
-            {
-                return null;
-            }
-
         }
 
         protected override bool SetProperty<T>(ref T member, T val,
@@ -46,8 +37,10 @@ namespace ComicBookShop.Data
         {
 
             var results = new List<ValidationResult>();
-            ValidationContext context = new ValidationContext(this);
-            context.MemberName = propertyName;
+            ValidationContext context = new ValidationContext(this)
+            {
+                MemberName = propertyName
+            };
             Validator.TryValidateProperty(value, context, results);
 
             if (results.Any())
