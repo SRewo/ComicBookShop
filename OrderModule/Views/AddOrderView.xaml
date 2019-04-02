@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OrderModule.Views"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="1080" d:DesignWidth="1920">
     <Grid>
@@ -23,7 +25,7 @@
         <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Add Order" Style="{StaticResource Title}"/>
         <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Vertical" >
             <StackPanel Orientation="Horizontal">
-                
+
                 <ComboBox ItemsSource="{Binding Publishers, Mode=OneWay}" SelectedItem="{Binding SelectedPublisher}" Width="250px" Margin="85,0,19,0">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -38,7 +40,7 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboBox>
-                <Button Content="Add Item" Width="125" Height="30" Margin="0,0,20,0"/>
+                <Button Content="Add Item" Width="125" Height="30" Margin="0,0,20,0" Command="{Binding AddItemCommand}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Search:" Margin="0,0,20,0" FontFamily="Nirmala UI" FontSize="16" FontWeight="Bold" />
@@ -66,14 +68,17 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="40,20,40,20" ItemsSource="{Binding Order.OrderItems}" AutoGenerateColumns="False" SelectionMode="Extended">
+        <DataGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="40,20,40,20" ItemsSource="{Binding Order.OrderItems}" AutoGenerateColumns="False" SelectionMode="Extended" CanUserAddRows="False" CanUserDeleteRows="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding ComicBook.Name}" Header="Name" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Quantity}" Header="Quantity"/>
-                <DataGridTextColumn Binding="{Binding ComicBook.Price}" Header="Unit Price" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Discount}" Header="Discount"/>
-                <DataGridTextColumn Binding="{Binding Price}" Header="Price" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding ComicBook.Title}" Header="Name" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Quantity, ValidatesOnDataErrors=True}" Header="Quantity"/>
+                <DataGridTextColumn Binding="{Binding ComicBook.Price,StringFormat={}{0:C}}" Header="Unit Price" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Discount, StringFormat={}{0}%, ValidatesOnDataErrors=True}" Header="Discount[%]"/>
+                <DataGridTextColumn Binding="{Binding Price,StringFormat={}{0:C}}" Header="Price" IsReadOnly="True"/>
             </DataGrid.Columns>
+            <DataGrid.RowValidationRules>
+                <NotifyDataErrorValidationRule ValidationStep="UpdatedValue"/>
+            </DataGrid.RowValidationRules>
         </DataGrid>
 
         <StackPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">

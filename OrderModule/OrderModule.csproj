@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OrderModule.cs" />
+    <Compile Include="ViewModels\AddOrderViewModel.cs" />
     <Compile Include="Views\AddOrderView.xaml.cs">
       <DependentUpon>AddOrderView.xaml</DependentUpon>
     </Compile>
@@ -104,8 +105,12 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="ViewModels\" />
+    <ProjectReference Include="..\ComicBookShop.Data\ComicBookShop.Data.csproj">
+      <Project>{60C48C74-C0B0-4D12-A6DB-D0DA0B602045}</Project>
+      <Name>ComicBookShop.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

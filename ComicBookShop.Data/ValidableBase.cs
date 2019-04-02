@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Prism.Mvvm;
 
 namespace ComicBookShop.Data
@@ -20,8 +21,13 @@ namespace ComicBookShop.Data
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged = delegate{};
 
         public IEnumerable GetErrors(string propertyName)
-        { 
+        {
+            if (propertyName != String.Empty && _propErrors.Keys.Any(x => x== propertyName))
+            {
                 return _propErrors[propertyName];
+            }
+
+                return null;
         }
 
         protected override bool SetProperty<T>(ref T member, T val,
@@ -35,25 +41,26 @@ namespace ComicBookShop.Data
 
         private void ValidateProperty<T>(string propertyName, T value)
         {
-
-            var results = new List<ValidationResult>();
-            ValidationContext context = new ValidationContext(this)
+            if (propertyName != String.Empty)
             {
-                MemberName = propertyName
-            };
-            Validator.TryValidateProperty(value, context, results);
+                var results = new List<ValidationResult>();
+                ValidationContext context = new ValidationContext(this)
+                {
+                    MemberName = propertyName
+                };
+                Validator.TryValidateProperty(value, context, results);
 
-            if (results.Any())
-            {
-                _propErrors[propertyName] = results.Select(c => c.ErrorMessage).ToList();
+                if (results.Any())
+                {
+                    _propErrors[propertyName] = results.Select(c => c.ErrorMessage).ToList();
+                }
+                else
+                {
+                    _propErrors.Remove(propertyName);
+                }
+
+                ErrorsChanged(this, new DataErrorsChangedEventArgs(propertyName));
             }
-            else
-            {
-                _propErrors.Remove(propertyName);
-            }
-
-            ErrorsChanged(this,new DataErrorsChangedEventArgs(propertyName));
-
         }
 
         public string GetFirstError(string propertyName)
@@ -62,10 +69,8 @@ namespace ComicBookShop.Data
             {
                 return _propErrors[propertyName].First();
             }
-            else
-            {
+
                 return null;
-            }
         }
     }
 }
