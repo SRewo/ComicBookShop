@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,5 +42,17 @@ namespace ComicBookShop.Data
             get => _employee;
             set => SetProperty(ref _employee, value);
         }
+
+        
+        private double _totalPrice;
+
+        [NotMapped]
+        public double TotalPrice
+        {
+            get => _totalPrice;
+            set => SetProperty(ref _totalPrice, value);
+        }
+
+
     }
 }

@@ -16,6 +16,7 @@ namespace OrderModule.ViewModels
         private SqlRepository<ComicBook> _comicBookRepository;
 
         public DelegateCommand AddItemCommand { get; set; }
+        public DelegateCommand RemoveItemCommand { get; set; }
 
 
         private List<Publisher> _publishers;
@@ -63,21 +64,61 @@ namespace OrderModule.ViewModels
         }
 
 
+        private OrderItem _selectedOrderItem;
+
+        public OrderItem SelectedOrderItem
+        {
+            get => _selectedOrderItem;
+            set => SetProperty(ref _selectedOrderItem, value);
+        }
+
+        private bool _canSave;
+
+        public bool CanSave
+        {
+            get => _canSave;
+            set => SetProperty(ref _canSave, value);
+        }
+
+
+
+
         public AddOrderViewModel()
         {
             AddItemCommand = new DelegateCommand(AddItem);
+            RemoveItemCommand = new DelegateCommand(RemoveItem);
         }
 
         private void AddItem()
         {
-            if (SelectedComicBook != null)
+            if (SelectedComicBook != null && Order.OrderItems.All(x => x.ComicBook.Id != SelectedComicBook.Id))
             {
-                Order.OrderItems.Add(new OrderItem()
+                OrderItem AddedOrderItem = new OrderItem()
                 {
                     ComicBook = SelectedComicBook,
                     Discount = 0,
                     Quantity = 1
-                });
+                };
+
+                AddedOrderItem.PropertyChanged += AddedOrderItem_PropertyChanged;
+
+                Order.OrderItems.Add(AddedOrderItem);
+                AddedOrderItem_PropertyChanged(null,null);
+            }
+        }
+
+        private void AddedOrderItem_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Order.TotalPrice = Order.OrderItems.Sum(x => x.Price);
+            CanSave = Order.OrderItems.All(x => !x.HasErrors) && !Order.HasErrors && Order.OrderItems.Count != 0;
+        }
+
+        private void RemoveItem()
+        {
+            if (SelectedOrderItem != null)
+            {
+                Order.OrderItems.Remove(SelectedOrderItem);
+                AddedOrderItem_PropertyChanged(null, null);
             }
         }
 
@@ -111,7 +152,7 @@ namespace OrderModule.ViewModels
                 Employee = GlobalVariables.LoggedEmployee,
                 OrderItems = new ObservableCollection<OrderItem>()
             };
-
+            CanSave = false;
         }
     }
 }
